@@ -1,0 +1,10 @@
+services: 
+  bot:
+    tty: true
+    restart: on-failure:2
+    volumes: 
+      - ./:/bot
+    build: 
+      context: ./
+      dockerfile: Dockerfile
+    
