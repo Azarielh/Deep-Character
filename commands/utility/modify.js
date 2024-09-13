@@ -4,26 +4,32 @@ const wait = require('node:timers/promises').setTimeout;
 // Read content of Json
 const Rdata = fs.readFileSync('prompts.json');
 // Convert json to js object
-const jsonprompt = JSON.parse(Rdata);
+let jsonprompt = JSON.parse(Rdata);
 
 
 function change_it(Pnum, dpprompt){
-	// Modify the JavaScript object by changing new data
-			jsonprompt.push({
-			num: Pnum,
-			Pprompt: dpprompt,
-		});
+	// Chercher l'index correspondant au numéro	
+	const index = Pnum - 1;
+
+	// Check if function has been call
+	console.log("Changeit function has been called with success with index :", index);
+
+	if (index >= 0 && index < jsonprompt.length) 
+		{
+		// Modify the JavaScript object by changing new data
+			jsonprompt[index].Pprompt = dpprompt;
+			
+			// Afficher le prompt modifié
+			console.log("Nouveau prompt :", jsonprompt[index].Pprompt);
+
 	// Convert the JavaScript object back into a JSON string
 			const jsonString = JSON.stringify(jsonprompt);
 			fs.writeFileSync('prompts.json', jsonString, 'utf-8', (err) => {
 				if (err) throw err;
-				console.log('Rdata');
+					console.log('Prompt modified with success');
 			  });
-			  const update_data = fs.readFileSync('prompts.json');
-			  const updated_jsonprompt = JSON.parse(update_data);
-	//Affiche le contenu du fichier avec le nouveau prompt dans la console.
-			  //console.log("After Adding data",JSON.stringify(updated_jsonprompt, null, 4));
-				
+		} else 
+			console.log('Error while trying to modify the prompt');				
 }
 	//Créer la commande
 module.exports = {
@@ -42,16 +48,25 @@ module.exports = {
 
 	async execute(interaction) {
 		// Get input from user
-		let Pnum = interaction.option.getString('index');
+		let Pnum = parseInt(interaction.options.getString('index'));
 		let dpprompt = interaction.options.getString('prompt');
+		console.log("Pnum : ", Pnum, "dpprompt : ", dpprompt);
 		// Faire patienter l'user
 		await interaction.reply("Oui maître, j"+"'"+"enregistre votre demande");
+		await wait(2000);
+		if (!Pnum || !dpprompt)
+		{
+			await interaction.editReply("Erreur : Les options fournies sont invalides");
+			return;
+		}
 		//Ajouter le nouveau prompt au json
-		try{
+		try
+		{
 			change_it(Pnum, dpprompt);
-		} 
-		catch (error) {
+		} catch (error) {
 			console.error(error);
+			await interaction.editReply("Une erreur est survenue lors de la modification du prompt")
+			return;
 		}
 		await wait(1_000);
 		// Notify the user

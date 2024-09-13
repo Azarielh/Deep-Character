@@ -56,7 +56,7 @@ async function liste(interaction, startIndex = 0) {
         }
 
         const filter = i => i.customId === 'precedent' || i.customId === 'suivant';
-        const collector = interaction.channel.createMessageComponentCollector({ filter, time: 120000 });
+        const collector = interaction.channel.createMessageComponentCollector({ filter, time: 500000 });
 
         collector.on('collect', async i => {
             if (i.customId === 'precedent') {
