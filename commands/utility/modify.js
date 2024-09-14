@@ -37,7 +37,8 @@ module.exports = {
 		.setName('mod')
 		.setDescription('Modifier un prompt')
 	//Ajouter une option requise
-		.addStringOption(option =>
+// Changement : addStringOption --> addIntegerOption
+		.addIntegerOption(option =>
 			option.setName('index')
 				.setDescription('numéro du prompt à modifier')
 				.setRequired(true))
@@ -48,11 +49,12 @@ module.exports = {
 
 	async execute(interaction) {
 		// Get input from user
-		let Pnum = parseInt(interaction.options.getString('index'));
+// Changement : String --> Integer
+		let Pnum = interaction.options.getInteger('index');
 		let dpprompt = interaction.options.getString('prompt');
 		console.log("Pnum : ", Pnum, "dpprompt : ", dpprompt);
 		// Faire patienter l'user
-		await interaction.reply("Oui maître, j"+"'"+"enregistre votre demande");
+		await interaction.reply("Oui maître, j'enregistre votre demande");
 		await wait(2000);
 		if (!Pnum || !dpprompt)
 		{
