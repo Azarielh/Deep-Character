@@ -20,10 +20,7 @@ function addit(dpprompt){
 				console.log('Rdata');
 			  });
 			  const update_data = fs.readFileSync('prompts.json');
-			  const updated_jsonprompt = JSON.parse(update_data);
-	//Affiche le contenu du fichier avec le nouveau prompt dans la console.
-			  //console.log("After Adding data",JSON.stringify(updated_jsonprompt, null, 4));
-				
+			  const updated_jsonprompt = JSON.parse(update_data);				
 }
 	//Créer la commande
 module.exports = {

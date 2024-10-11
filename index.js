@@ -1,7 +1,7 @@
 const fs = require('node:fs'); // import node:fs library
 const path = require('node:path');// import node:path witch improve path relating behaviour
 const { Client, Collection, Events, GatewayIntentBits } = require('discord.js'); // import discord library relative to the bot needs
-const { token } = require('./.gitignore/config.json'); // import config.json where token and guilds data are stocked
+const { token } = require('./config.json'); // import config.json where token and guilds data are stocked
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
