@@ -1,26 +1,26 @@
 const fs = require('node:fs');
 const { SlashCommandBuilder } = require('discord.js');
-const wait = require('node:timers/promises').setTimeout;
 
 	//Créer la commande
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('jdé')
+		.setName('jd')
 		.setDescription('Fait un jet de dé')
-	//Ajouter une option requise
+	// Set number option 
 		.addNumberOption(option =>
 			option.setName('faces')
 				.setDescription('Décide combien de face a ton dé?')
-				.setRequired(true))
-        .addNumberOption(option =>
-            option.setName('how_many')
-                .setDescription('Combien de dé veux-tu lancer?')
-                .setRequired(true)),
+				.setRequired(true)),
+        // .addNumberOption(option =>
+        //     option.setName('how_many')
+        //         .setDescription('Combien de dé veux-tu lancer?')
+        //         .setRequired(true)),
 
 	async execute(interaction) {
-		let facesroll = interaction.options.getString('faces');
-		let how_many_roll = interaction.options.getString('how_many');
-
-		await interaction.reply("Dé 1 :", Math.floor(Math.random() * facesroll));
+		console.log("coucou");
+		let facesroll = interaction.options.getNumber('faces');
+		// let how_many_roll = interaction.options.getString('how_many');
+		// let roll = 1;
+		await interaction.reply(`**D${facesroll}  :  ** ${Math.floor(Math.random() * facesroll) + 1}`);
 	}
 };
