@@ -11,7 +11,7 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("inspire")
     .setDescription(
-      'Questionne son personnage ou le met dans une situation particuliere'
+      'Questionne les joueurs sur leurs personnage ou le met dans une situation particuliere'
     )
     .addStringOption(option =>
       option.setName('index')
@@ -23,9 +23,9 @@ module.exports = {
     let Pnumber = interaction.options.getString("index");
 	try {
 		if (Pnumber) {
-			await interaction.reply(jsonprompt[parseInt(Pnumber)-1].Pprompt);
+			await interaction.reply({content:".." + jsonprompt[parseInt(Pnumber)-1].Pprompt, fetchReply:true});
 		} else {
-			await interaction.reply(randomPrompt().Pprompt);
+			await interaction.reply({content:".." + randomPrompt().Pprompt, fetchReply:true});
 	
 		}
 	} catch(e){
