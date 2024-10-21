@@ -13,20 +13,39 @@ client.commands = new Collection();
 const foldersPath = path.join(__dirname, 'commands'); // Open and checks for commands files
 const commandFolders = fs.readdirSync(foldersPath);
 
-const users_Data = path.join(__dirname, 'data_character.json'); // Get the so named file
-
-function load_UsersData() {
-	if (fs.existsSync(users_Data)) {
-		const rawData = fs.readFileSync(users_Data);
+// Setting up function for managing files update 
+function load_UsersData(guildId) {
+	const usersData = path.join(__dirname, `data_character_${guildId}.json`); // will create the file if does not exist
+	
+	// Check if files exist
+	if (fs.existsSync(usersData)) {
+		const rawData = fs.readFileSync(usersData);
 		return JSON.parse(rawData);
+	} else { // return empty object if file is new
+		return {}
 	}
-	return {};
 }
 
-function save_UsersData(data) {
+function copyInitialPrompts(guildId) {
+    const initialPromptsFilePath = path.join(__dirname, 'prompts.json');
+    const guildPromptsFilePath = path.join(__dirname, `prompts_${guildId}.json`);
+    
+    // Copier le fichier prompts.json vers prompts_guildId.json
+    if (fs.existsSync(initialPromptsFilePath)) {
+        fs.copyFileSync(initialPromptsFilePath, guildPromptsFilePath);
+        console.log(`Fichier copié : prompts_${guildId}.json`);
+    } else {
+        console.error(`Le fichier initial prompts.json est introuvable.`);
+    }
+}
+
+function save_UsersData(guildId, data) {
+	const users_Data = path.join(__dirname, `data_character_${guildId}.json`);
+	// Save new data in the right guild file
 	fs.writeFileSync(users_Data, JSON.stringify(data, null, 2));
 }
 
+// Check for error in processing commands files while bot is starting
 for (const folder of commandFolders) {
 	const commandsPath = path.join(foldersPath, folder);
 	const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
@@ -42,6 +61,16 @@ for (const folder of commandFolders) {
 }
 
 client.once(Events.ClientReady, readyClient => {
+	client.guilds.cache.forEach(guild => {
+        const guildId = guild.id;
+		if (!fs.existsSync(path.join(__dirname, `data_character_${guildId}.json`))) {
+			save_UsersData(guildId, {}); // Build a new file for this guild
+			console.log(`Fichier créé : data_character_${guildId}.json`);
+		}
+		if (!fs.existsSync(path.join(__dirname, `prompts_${guildId}.json`))) {
+            copyInitialPrompts(guildId); // Copier prompts.json pour cette guilde
+        }
+	});
 	console.log(`Ready! Logged in as ${readyClient.user.tag}`);
 }); 
 
