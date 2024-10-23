@@ -14,13 +14,13 @@ const foldersPath = path.join(__dirname, 'commands'); // Open and checks for com
 const commandFolders = fs.readdirSync(foldersPath);
 
 // Setting up function for managing files update 
-function load_UsersData(guildId) {
+
+function load_UsersData(guildId) { // Guild' file for character's data
 	const usersData = path.join(__dirname, `data_character_${guildId}.json`); // will create the file if does not exist
 	
-	// Check if files exist
-	if (fs.existsSync(usersData)) {
+	if (fs.existsSync(usersData)) { 	// Check if guild's file exist
 		const rawData = fs.readFileSync(usersData);
-		return JSON.parse(rawData);
+		return JSON.parse(rawData); // if yes return the guild's file
 	} else { // return empty object if file is new
 		return {}
 	}
@@ -95,15 +95,12 @@ client.on(Events.InteractionCreate, async interaction => {
 	}
 });
 
-// Gestion des messages texte, y compris les réponses à des messages
+// Listen for answers to Deep-character message from inspire
 client.on('messageCreate', async (message) => {
-    // Vérification si c'est une réponse
-    if (message.reference) {
+    if (message.reference) {     // Check if users message got a reference
         try {
-            // Récupérer le message auquel on a répondu
-            const repliedMessage = await message.channel.messages.fetch(message.reference.messageId);
-            // Check if message is from inspire command from this bot
-			if (repliedMessage.author.bot && repliedMessage.content.startsWith('..')) {
+            const repliedMessage = await message.channel.messages.fetch(message.reference.messageId); // Get the messageId from the message being answers to
+			if (repliedMessage.author.bot && repliedMessage.content.startsWith('..')) {   // Check if message is from inspire command from Deep-Character
 				const data = load_UsersData(); // load the so named JSON
 				
 				const userKey = `${message.author.username}-${message.author.id}`; // create a user key as "pseudo-id"
