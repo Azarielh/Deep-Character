@@ -2,13 +2,18 @@ const fs = require('node:fs'); // import node:fs library
 const path = require('node:path');// import node:path witch improve path relating behaviour
 const { Client, Collection, Events, GatewayIntentBits, Message } = require('discord.js'); // import discord library relative to the bot needs
 const { token } = require('./config.json'); // import config.json where token and guilds data are stocked
+const cron = require('node-cron');
+const Rdata = fs.readFileSync("prompts.json");
+const jsonprompt = JSON.parse(Rdata);
 
 const client = new Client({ intents: [
 	GatewayIntentBits.Guilds,
 	GatewayIntentBits.GuildMessages,
 	GatewayIntentBits.MessageContent
 ] });
-
+function randomPrompt() {
+	return jsonprompt[Math.floor(Math.random() * jsonprompt.length)];
+  }
 client.commands = new Collection();
 const foldersPath = path.join(__dirname, 'commands'); // Open and checks for commands files
 const commandFolders = fs.readdirSync(foldersPath);
@@ -33,7 +38,7 @@ function copyInitialPrompts(guildId) {
     // Copier le fichier prompts.json vers prompts_guildId.json
     if (fs.existsSync(initialPromptsFilePath)) {
         fs.copyFileSync(initialPromptsFilePath, guildPromptsFilePath);
-        console.log(`Fichier copié : prompts_${guildId}.json`);
+        console.log(`Fichier copié : prompts_${guildId}.json`);    
     } else {
         console.error(`Le fichier initial prompts.json est introuvable.`);
     }
@@ -59,6 +64,16 @@ for (const folder of commandFolders) {
 		}
 	}
 }
+// Send Scheduled inspire command
+cron.schedule('* 17 * * *', () =>  {
+	const channel = client.channels.cache.get('1072781715585650688'); // This number is channel's ID. I'll have to make it changeable to deploy)
+	if (channel)
+		channel.send(randomPrompt().Pprompt);
+	console.log('bazunga');
+}, {
+	scheduled: true,
+	timezone: "Europe/Paris"
+});
 
 client.once(Events.ClientReady, readyClient => {
 	client.guilds.cache.forEach(guild => {
@@ -68,7 +83,7 @@ client.once(Events.ClientReady, readyClient => {
 			console.log(`Fichier créé : data_character_${guildId}.json`);
 		}
 		if (!fs.existsSync(path.join(__dirname, `prompts_${guildId}.json`))) {
-            copyInitialPrompts(guildId); // Copier prompts.json pour cette guilde
+            copyInitialPrompts(guildId); // Copy from prompt.json and rename prompt_guildId.json so each guild has its own prompt file.
         }
 	});
 	console.log(`Ready! Logged in as ${readyClient.user.tag}`);
@@ -99,7 +114,7 @@ client.on(Events.InteractionCreate, async interaction => {
 client.on('messageCreate', async (message) => {
     if (message.reference) {     // Check if users message got a reference
         try {
-            const repliedMessage = await message.channel.messages.fetch(message.reference.messageId); // Get the messageId from the message being answers to
+            const repliedMessage = await message.channel.messages.fetch(message.reference.messageId); // Get the messageId from the message being answered to
 			if (repliedMessage.author.bot && repliedMessage.content.startsWith('..')) {   // Check if message is from inspire command from Deep-Character
 				const data = load_UsersData(); // load the so named JSON
 				
