@@ -1,9 +1,11 @@
 const fs = require('node:fs'); // import node:fs library
 const path = require('node:path');// import node:path witch improve path relating behaviour
-const { Client, Collection, Events, GatewayIntentBits, Message } = require('discord.js'); // import discord library relative to the bot needs
-const { token } = require('./config.json'); // import config.json where token and guilds data are stocked
 const cron = require('node-cron');
-const Rdata = fs.readFileSync("prompts.json");
+
+const { Client, Collection, Events, GatewayIntentBits, Message } = require('discord.js'); // import discord library relative to the bot needs
+
+const { token } = require('./config.json'); // import token
+const Rdata = fs.readFileSync("prompts.json"); // import global prompts
 const jsonprompt = JSON.parse(Rdata);
 
 const client = new Client({ intents: [
@@ -11,17 +13,21 @@ const client = new Client({ intents: [
 	GatewayIntentBits.GuildMessages,
 	GatewayIntentBits.MessageContent
 ] });
+
+//___________________________Randomize prompt for cron_____________________________________________________________
 function randomPrompt() {
 	return jsonprompt[Math.floor(Math.random() * jsonprompt.length)];
   }
+
+
 client.commands = new Collection();
 const foldersPath = path.join(__dirname, 'commands'); // Open and checks for commands files
 const commandFolders = fs.readdirSync(foldersPath);
 
-// Setting up function for managing files update 
+//____________________________Setting up function for managing files update____________________________________________
 
-function load_UsersData(guildId) { // Guild' file for character's data
-	const usersData = path.join(__dirname, `data_character_${guildId}.json`); // will create the file if does not exist
+function load_UsersData(type, guildId) { // Guild' file for character's data
+	const usersData = path.join(__dirname, `${type}_${guildId}.json`); // will create the file if does not exist
 	
 	if (fs.existsSync(usersData)) { 	// Check if guild's file exist
 		const rawData = fs.readFileSync(usersData);
@@ -31,9 +37,9 @@ function load_UsersData(guildId) { // Guild' file for character's data
 	}
 }
 
-function copyInitialPrompts(guildId) {
+function copyInitialPrompts(adress, guildId) {
     const initialPromptsFilePath = path.join(__dirname, 'prompts.json');
-    const guildPromptsFilePath = path.join(__dirname, `prompts_${guildId}.json`);
+    const guildPromptsFilePath = path.join(__dirname, `${adress}_${guildId}.json`);
     
     // Copier le fichier prompts.json vers prompts_guildId.json
     if (fs.existsSync(initialPromptsFilePath)) {
@@ -44,10 +50,11 @@ function copyInitialPrompts(guildId) {
     }
 }
 
-function save_UsersData(guildId, data) {
-	const users_Data = path.join(__dirname, `data_character_${guildId}.json`);
+function save_Data(adress, name, data) {
+	const users_Data = path.join(__dirname, `${adress}_${name}.json`);
 	// Save new data in the right guild file
 	fs.writeFileSync(users_Data, JSON.stringify(data, null, 2));
+	console.log(`Fichier créé : ${adress}_${name}.json`);
 }
 
 // Check for error in processing commands files while bot is starting
@@ -77,13 +84,23 @@ cron.schedule('* 17 * * *', () =>  {
 
 client.once(Events.ClientReady, readyClient => {
 	client.guilds.cache.forEach(guild => {
-        const guildId = guild.id;
-		if (!fs.existsSync(path.join(__dirname, `data_character_${guildId}.json`))) {
-			save_UsersData(guildId, {}); // Build a new file for this guild
-			console.log(`Fichier créé : data_character_${guildId}.json`);
-		}
-		if (!fs.existsSync(path.join(__dirname, `prompts_${guildId}.json`))) {
-            copyInitialPrompts(guildId); // Copy from prompt.json and rename prompt_guildId.json so each guild has its own prompt file.
+        const guildId = guild.id; // get guildId
+		const guildKey = `${guild.name}${guildId}`; // create a guild key as "name-id"
+
+		// Check for guild folder and create if non existant with associate files
+		if (!fs.existsSync(path.join(__dirname, `./guilds/${guildKey}/`))) {
+
+			fs.mkdirSync(`./guilds/${guildKey}/`); // Make the guild's folder
+			console.log(`Dossier créé : ${guildKey}.json`);
+			
+			save_Data(`./guilds/${guildKey}/`,`config_${guildId}`, { // Build the config's file within guild folder
+				name: `${guild.name}`,
+				ID: `${guildId}`
+			})
+
+			save_Data(`./guilds/${guildKey}/`,`data_character_${guildId}`, {}); // Build the data_caracter's file for this guild
+
+            copyInitialPrompts(`./guilds/${guildKey}/`,`prompts_${guildId}`); // Copy from prompt.json and rename prompt_guildId.json so each guild has its own prompt file.
         }
 	});
 	console.log(`Ready! Logged in as ${readyClient.user.tag}`);
@@ -116,7 +133,7 @@ client.on('messageCreate', async (message) => {
         try {
             const repliedMessage = await message.channel.messages.fetch(message.reference.messageId); // Get the messageId from the message being answered to
 			if (repliedMessage.author.bot && repliedMessage.content.startsWith('..')) {   // Check if message is from inspire command from Deep-Character
-				const data = load_UsersData(); // load the so named JSON
+				const data = load_UsersData('data_character', guildId); // load the so named JSON
 				
 				const userKey = `${message.author.username}-${message.author.id}`; // create a user key as "pseudo-id"
 				// Check if user exist in Database or not
@@ -133,7 +150,7 @@ client.on('messageCreate', async (message) => {
 					data[userKey][promptMessage].push(message.content); // Update the answer if prompt data already exist
 				}
 				
-				save_UsersData(data);
+				save_Data('data_character',guildId ,data);
 
 			    // Tu peux envoyer une réponse dans le canal si tu le souhaites
 				await message.channel.send(`Si seulement tu réalisais les implications de cette réponse :smirk:`);
