@@ -5,8 +5,8 @@ const cron = require('node-cron');
 const { Client, Collection, Events, GatewayIntentBits, Message } = require('discord.js'); // import discord library relative to the bot needs
 
 const { token } = require('./config.json'); // import token
-const Rdata = fs.readFileSync("prompts.json"); // import global prompts
-const jsonprompt = JSON.parse(Rdata);
+const Rdata = fs.readFileSync("prompts.json"); // import global prompts 
+const jsonprompt = JSON.parse(Rdata); 
 
 const client = new Client({ intents: [
 	GatewayIntentBits.Guilds,
@@ -84,23 +84,21 @@ cron.schedule('* 17 * * *', () =>  {
 
 client.once(Events.ClientReady, readyClient => {
 	client.guilds.cache.forEach(guild => {
-        const guildId = guild.id; // get guildId
-		const guildKey = `${guild.name}${guildId}`; // create a guild key as "name-id"
 
 		// Check for guild folder and create if non existant with associate files
-		if (!fs.existsSync(path.join(__dirname, `./guilds/${guildKey}/`))) {
+		if (!fs.existsSync(path.join(__dirname, `./guilds/${guild.id}/`))) {
 
-			fs.mkdirSync(`./guilds/${guildKey}/`); // Make the guild's folder
-			console.log(`Dossier créé : ${guildKey}.json`);
+			fs.mkdirSync(`./guilds/${guild.id}/`); // Make the guild's folder
+			console.log(`Dossier créé : ${guild.id}.json`);
 			
-			save_Data(`./guilds/${guildKey}/`,`config_${guildId}`, { // Build the config's file within guild folder
+			save_Data(`./guilds/${guild.id}/`,`config_${guild.id}`, { // Build the config's file within guild folder
 				name: `${guild.name}`,
-				ID: `${guildId}`
+				ID: `${guild.id}`
 			})
 
-			save_Data(`./guilds/${guildKey}/`,`data_character_${guildId}`, {}); // Build the data_caracter's file for this guild
+			save_Data(`./guilds/${guild.id}/`,`data_character_${guild.id}`, {}); // Build the data_caracter's file for this guild
 
-            copyInitialPrompts(`./guilds/${guildKey}/`,`prompts_${guildId}`); // Copy from prompt.json and rename prompt_guildId.json so each guild has its own prompt file.
+            copyInitialPrompts(`./guilds/${guild.id}/`,`prompts_${guild.id}`); // Copy from prompt.json and rename prompt_guildId.json so each guild has its own prompt file.
         }
 	});
 	console.log(`Ready! Logged in as ${readyClient.user.tag}`);
@@ -133,7 +131,7 @@ client.on('messageCreate', async (message) => {
         try {
             const repliedMessage = await message.channel.messages.fetch(message.reference.messageId); // Get the messageId from the message being answered to
 			if (repliedMessage.author.bot && repliedMessage.content.startsWith('..')) {   // Check if message is from inspire command from Deep-Character
-				const data = load_UsersData('data_character', guildId); // load the so named JSON
+				const data = load_UsersData('data_character', guild.id); // load the so named JSON
 				
 				const userKey = `${message.author.username}-${message.author.id}`; // create a user key as "pseudo-id"
 				// Check if user exist in Database or not
@@ -150,7 +148,7 @@ client.on('messageCreate', async (message) => {
 					data[userKey][promptMessage].push(message.content); // Update the answer if prompt data already exist
 				}
 				
-				save_Data('data_character',guildId ,data);
+				save_Data('data_character',guild.id ,data);
 
 			    // Tu peux envoyer une réponse dans le canal si tu le souhaites
 				await message.channel.send(`Si seulement tu réalisais les implications de cette réponse :smirk:`);
