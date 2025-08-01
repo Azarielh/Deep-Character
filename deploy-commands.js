@@ -1,7 +1,9 @@
 const { REST, Routes } = require('discord.js');
-const { clientId, token } = require('./config.json');
+const { clientId, token, guildId } = require('./config.json');
 const fs = require('node:fs');
 const path = require('node:path');
+
+const is_test_mode = process.argv.includes('--test');
 
 const commands = [];
 // Grab all the command folders from the commands directory you created earlier
@@ -30,16 +32,19 @@ const rest = new REST().setToken(token);
 // and deploy your commands!
 (async () => {
 	try {
-		console.log(`Started refreshing ${commands.length} application (/) commands.`);
-
+		const route = is_test_mode ? Routes.applicationGuildCommands(clientId, guildId)
+									: Routes.applicationCommands(clientId);
+		
+		const deployType = is_test_mode ? `TEST sur la guild ${guildId}` : 'GLOBAL';
+		console.log(`Started refreshing ${commands.length} application (/) commands in ${deployType} mode.`);
+		
 		// The put method is used to fully refresh all commands in the guild with the current set
 		const data = await rest.put(
-			Routes.applicationCommands(clientId), // Déploie les commandes globales
+			route, // ✅ Utilise la variable route !
 			{ body: commands },
 		);
 		
-
-		console.log(`Successfully reloaded ${data.length} application (/) commands.`);
+		console.log(`Successfully reloaded ${data.length} application (/) commands in ${deployType} mode.`);
 	} catch (error) {
 		// And of course, make sure you catch and log any errors!
 		console.error(error);

@@ -1,5 +1,5 @@
 const fs = require("node:fs");
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
 const wait = require("node:timers/promises").setTimeout;
 const prompt_manager = require('../../srcs/prompt_manager.js');
 
@@ -23,7 +23,8 @@ const client = new Client({
 module.exports = {
   data: new SlashCommandBuilder()
 	.setName("add")
-	.setDescription("Ajouter un prompt")
+	.setDescription("Add a new prompt")
+	.setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
 	//Ajouter une option requise
 	.addStringOption((option) =>
 	  option
