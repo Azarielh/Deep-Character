@@ -1,36 +1,32 @@
 const fs = require("node:fs");
 const { SlashCommandBuilder } = require("discord.js");
-const Rdata = fs.readFileSync("prompts.json");
-const jsonprompt = JSON.parse(Rdata);
-
-function randomPrompt() {
-  return jsonprompt[Math.floor(Math.random() * jsonprompt.length)];
-}
+const prompt_manager = require('../../srcs/prompt_manager.js');
 
 module.exports = {
-  data: new SlashCommandBuilder()
-    .setName("inspire")
-    .setDescription(
-      'Questionne les joueurs sur leurs personnage ou le met dans une situation particuliere'
-    )
-    .addStringOption(option =>
-      option.setName('index')
-        .setDescription('numéro du prompt')
-        .setRequired(false)
-    ),
+data: new SlashCommandBuilder()
+	.setName("inspire")
+	.setDescription(
+		'Questionne les joueurs sur leurs personnage ou le met dans une situation particuliere'
+	)
+	.addStringOption(option =>
+	  option.setName('index')
+		.setDescription('numéro du prompt')
+		.setRequired(false)
+	),
 
   async execute(interaction) {
-    let Pnumber = interaction.options.getString("index");
+	let Pnumber = interaction.options.getString("index");
 	try {
 		if (Pnumber) {
-			await interaction.reply({content:".." + jsonprompt[parseInt(Pnumber)-1].Pprompt, fetchReply:true});
+			const prompt = prompt_manager.getPromptByIndex(parseInt(Pnumber), interaction.guild);
+			await interaction.reply({content: `${Pnumber} : ${prompt.Pprompt}`});
 		} else {
-			await interaction.reply({content:".." + randomPrompt().Pprompt, fetchReply:true});
+			const prompt = prompt_manager.randomPrompt(interaction.guild);
+			await interaction.reply({content:`${prompt.num} : ${prompt.Pprompt}`});
 	
 		}
 	} catch(e){
 		await interaction.reply("L'index donné est incorrect")
 	}
- 
   },
 };

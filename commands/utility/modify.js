@@ -1,37 +1,8 @@
 const fs = require("node:fs");
 const { SlashCommandBuilder } = require("discord.js");
 const wait = require("node:timers/promises").setTimeout;
+const prompt_manager = require('../../srcs/prompt_manager.js')
 
-function change_it(Pnum, dpprompt, guild) {
-  // Read content of Json
-  const filepath = `./guilds/${guild.id}/prompts_${guild.id}.json`;
-  const Rdata = fs.readFileSync(filepath);
-  const jsonprompt = JSON.parse(Rdata);
-
-  // Chercher l'index correspondant au numéro
-  const index = Pnum - 1;
-
-  // Check if function has been call
-  console.log(
-    "Changeit function has been called with success with index :",
-    index
-  );
-
-  if (index >= 0 && index < jsonprompt.length) {
-    // Modify the JavaScript object by changing new data
-    jsonprompt[index].Pprompt = dpprompt;
-
-    // Afficher le prompt modifié
-    console.log("Nouveau prompt :", jsonprompt[index].Pprompt);
-
-    // Convert the JavaScript object back into a JSON string
-    const jsonString = JSON.stringify(jsonprompt);
-    fs.writeFileSync("prompts.json", jsonString, "utf-8", (err) => {
-      if (err) throw err;
-      console.log("Prompt modified with success");
-    });
-  } else console.log("Error while trying to modify the prompt");
-}
 //Créer la commande
 module.exports = {
   data: new SlashCommandBuilder()

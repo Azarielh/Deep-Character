@@ -1,10 +1,12 @@
 const fs = require('node:fs');
 const { SlashCommandBuilder } = require('discord.js');
 
-//Créer la commande
+/**
+ * @brief tap jd to roll any number of dice you want. Of course, you can choose how many faces your dice have.
+ */
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('jd')
+		.setName('roll')
 		.setDescription('Fait un jet de dé')
 		// Set number option 
 		.addNumberOption(option =>
