@@ -1,7 +1,8 @@
 const fs = require("node:fs");
+const path = require("node:path");
 
 function randomPrompt(guild) {
-	const filepath  = `./guilds/${guild.id}/prompts_${guild.id}.json`;
+	const filepath = path.join(process.cwd(), `./guilds/${guild.id}/_prompts_${guild.id}.json`);
 	const Rdata = fs.readFileSync(filepath);
 	const jsonprompt = JSON.parse(Rdata);
 
@@ -9,7 +10,7 @@ function randomPrompt(guild) {
 }
 
 function getPromptByIndex(index, guild) {
-	const filepath  = `./guilds/${guild.id}/prompts_${guild.id}.json`;
+	const filepath = path.join(process.cwd(), `./guilds/${guild.id}/_prompts_${guild.id}.json`);
 	const Rdata = fs.readFileSync(filepath);
 	const jsonprompt = JSON.parse(Rdata);
 	
@@ -22,19 +23,19 @@ function getPromptByIndex(index, guild) {
 
 function addit(dpprompt, guild) {
 // Read content of Json
-	const filepath = `./guilds/${guild.id}/prompts_${guild.id}.json`;
+	const filepath = path.join(process.cwd(), `./guilds/${guild.id}/_prompts_${guild.id}.json`);
 	const Rdata = fs.readFileSync(filepath);
 	const jsonprompt = JSON.parse(Rdata);
 
 // Modify the JavaScript object by adding new data
-
 	jsonprompt.push({
 		num: jsonprompt.length + 1,
+		tag: "standard",
 		Pprompt: dpprompt,
 	});
 
 // Convert the JavaScript object back into a JSON string
-	const jsonString = JSON.stringify(jsonprompt);
+	const jsonString = JSON.stringify(jsonprompt, null, 4);
 	fs.writeFileSync(filepath, jsonString, "utf-8", (err) => {
 	if (err) throw err;
 	console.log("Error while writing the new prompt");
@@ -43,7 +44,7 @@ function addit(dpprompt, guild) {
 
 function change_it(Pnum, dpprompt, guild) {
   // Read content of Json
-  const filepath = `./guilds/${guild.id}/prompts_${guild.id}.json`;
+  const filepath = path.join(process.cwd(), `./guilds/${guild.id}/_prompts_${guild.id}.json`);
   const Rdata = fs.readFileSync(filepath);
   const jsonprompt = JSON.parse(Rdata);
 
@@ -64,8 +65,8 @@ function change_it(Pnum, dpprompt, guild) {
     console.log("Nouveau prompt :", jsonprompt[index].Pprompt);
 
     // Convert the JavaScript object back into a JSON string
-    const jsonString = JSON.stringify(jsonprompt);
-    fs.writeFileSync("prompts.json", jsonString, "utf-8", (err) => {
+    const jsonString = JSON.stringify(jsonprompt, null, 4);
+    fs.writeFileSync(filepath, jsonString, "utf-8", (err) => {
       if (err) throw err;
       console.log("Prompt modified with success");
     });

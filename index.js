@@ -1,9 +1,9 @@
-const fs = require("node:fs"); // import node:fs library
-const path = require("node:path"); // import node:path witch improve path relating behaviour
-const cron = require("node-cron");
-const prompt_manager = require('./srcs/prompt_manager.js');
-const data_manager = require('./srcs/data_manager.js');
-
+const fs	=		require("node:fs"); // import node:fs library
+const path	=		require("node:path"); // import node:path witch improve path relating behaviour
+const cron	=		require("node-cron");
+const prompt_manager	 =	require('./srcs/prompt_manager.js');
+const data_manager		 =	require('./srcs/data_manager.js');
+const { login_manager }	 =	require('./srcs/login_manager.js');
 const {
   Client,
   Collection,
@@ -46,10 +46,13 @@ for (const folder of commandFolders) {
 }
 
 // Send Scheduled inspire command
+//TODO: A déplacer dans un fichier indépendant
 cron.schedule(
   "*/10 */5 * * *",
   () => {
+	//FIXME: Channel ID "1072492463127793724" hardcodé pour le cron
 	const channel = client.channels.cache.get("1072492463127793724"); // This number is channel's ID. I'll have to make it changeable to deploy)
+	//FIXME: Cron job utilise interaction.guild alors que interaction n'existe pas dans ce contexte
 	if (channel) channel.send(prompt_manager.randomPrompt(interaction.guild).Pprompt);
 	console.log("bazunga");
   },
@@ -60,110 +63,100 @@ cron.schedule(
 );
 
 client.once(Events.ClientReady, (readyClient) => {
-  client.guilds.cache.forEach((guild) => {
-	// Check for guild folder and create if non existant with associate files
-	if (!fs.existsSync(path.join(__dirname, `./guilds/${guild.id}/`))) {
-	  fs.mkdirSync(`./guilds/${guild.id}/`); // Make the guild's folder
-	  console.log(`Dossier créé : ${guild.id}.json`);
 
-	  data_manager.save_Data(`./guilds/${guild.id}/`, `config_${guild.id}`, {
-		// Build the config's file within guild folder
-		name: `${guild.name}`,
-		ID: `${guild.id}`,
-	  });
-
-	  data_manager.save_Data(`./guilds/${guild.id}/`, `data_character_${guild.id}`, {}); // Build the data_caracter's file within guild's folder
-
-	  data_manager.copyInitialPrompts(`./guilds/${guild.id}/`, `prompts_${guild.id}`); // Copy from prompt.json and rename prompt_guild within guild's folder.
-	}
-	//_______________________________Send a welcome message at first connection on a guild__________________________________________
-	// Find a channel named "general"
-	if (!fs.existsSync(path.join(__dirname, `./guilds/${guild.id}/`))) {
-	  guild.systemChannel.send(
-		"Hello, I'm Deep-Character ! My role is to enhance your RPG experience. I'm pleased to be invite on your server and I'm gratefull for it ! My maker still working on me and I know much more fixes and features are yet to come"
-	  );
-	  return;
-	} else if (fs.existsSync(path.join(__dirname, `./guilds/${guild.id}/`))) {
-		guild.systemChannel.send("Hello there ! I'm back");
-	} else {
-	  console.log(`No "general" channel found in ${guild.name}`);
-	}
-  });
-  console.log(`Ready! Logged in as ${readyClient.user.tag}`);
+	login_manager(client);
+	console.log(`Ready! Logged in as ${readyClient.user.tag}`);
 });
 
-client.on(Events.InteractionCreate, async (interaction) => {
-  if (!interaction.isChatInputCommand()) return;
-  const command = interaction.client.commands.get(interaction.commandName);
-
-  if (!command) {
-	console.error(`No command matching ${interaction.commandName} was found.`);
-	return;
-  }
+client.on(Events.InteractionCreate, async (interaction) =>
+{
+	if (!interaction.isChatInputCommand()) return;
+	const command = interaction.client.commands.get(interaction.commandName);
+	if (!command) {
+		console.error(`No command matching ${interaction.commandName} was found.`);
+		return;
+	}
 
   try {
 	await command.execute(interaction);
   } catch (error) {
 	console.error(error);
+	
+	const errorResponse = {
+	  content: "There was an error while executing this command!",
+	  ephemeral: true
+	};
+	
 	if (interaction.replied || interaction.deferred) {
-	  await interaction.followUp({
-		content: "There was an error while executing this command!",
-		ephemeral: true,
-	  });
+	  await interaction.followUp(errorResponse);
 	} else {
-	  await interaction.reply({
-		content: "There was an error while executing this command!",
-		ephemeral: true,
-	  });
+	  await interaction.reply(errorResponse);
 	}
   }
 });
 
 // Listen for answers to Deep-character message from inspire
 client.on("messageCreate", async (message) => {
+  console.log("🔵 Message reçu:", message.content.substring(0, 50));
+  
   if (message.reference) {
-	// Check if users message got a reference
-	try {
-	  const repliedMessage = await message.channel.messages.fetch(
-		message.reference.messageId
-	  ); // Get the messageId from the message being answered to
-	  if (
-		repliedMessage.author.bot &&
-		repliedMessage.content.startsWith("..")
-	  ) {
-		// Check if message is from inspire command from Deep-Character
-		const data = data_manager.load_UsersData("data_character", guild.id); // load the so named JSON
+    console.log("🟡 Message avec référence détecté");
+    
+    try {
+      const repliedMessage = await message.channel.messages.fetch(message.reference.messageId);
+      console.log("🟢 Message original récupéré:", repliedMessage.content.substring(0, 50));
+      console.log("🔸 Auteur est bot:", repliedMessage.author.bot);
+      console.log("🔸 Test regex /^\\d/:", /^\d/.test(repliedMessage.content));
+      
+      if (repliedMessage.author.bot && /^\d/.test(repliedMessage.content)) {
+        console.log("✅ CONDITIONS REMPLIES - Traitement en cours");
+        
+        const data = data_manager.load_data(message.guild.id, "data_character");
+        console.log("📂 Données chargées:", Object.keys(data).length, "utilisateurs");
 
 		const userKey = `${message.author.username}-${message.author.id}`; // create a user key as "pseudo-id"
+		console.log("👤 Clé utilisateur:", userKey);
+		
 		// Check if user exist in Database or not
 		if (!data[userKey]) {
 		  data[userKey] = {};
+		  console.log("🆕 Nouvel utilisateur créé");
+		} else {
+		  console.log("👤 Utilisateur existant trouvé");
 		}
 
 		// Check if prompt exist within the user's data or not
 		let promptMessage = repliedMessage.content
 		  .trimStart()
 		  .replace(/^(\.\.\s*)/, "");
+		console.log("📝 Prompt nettoyé:", promptMessage);
 
 		if (!data[userKey][promptMessage]) {
 		  data[userKey][promptMessage] = [message.content]; // Create the prompt data if does not exist yet
+		  console.log("🆕 Nouveau prompt créé");
 		} else {
 		  data[userKey][promptMessage].push(message.content); // Update the answer if prompt data already exist
+		  console.log("➕ Réponse ajoutée au prompt existant");
 		}
 
-		data_manager.save_Data("data_character", guild.id, data);
+		data_manager.save_Data("data_character", message.guild.id, data);
+		console.log("💾 Données sauvegardées");
 
 		// Tu peux envoyer une réponse dans le canal si tu le souhaites
 		await message.channel.send(
 		  `Si seulement tu réalisais les implications de cette réponse :smirk:`
 		);
-	  }
-	} catch (error) {
-	  console.error(
-		"Erreur lors de la récupération du message d'origine :",
-		error
-	  );
-	}
+		console.log("✅ Message de confirmation envoyé");
+      } else {
+        console.log("❌ Conditions non remplies");
+        if (!repliedMessage.author.bot) console.log("   - Message pas d'un bot");
+        if (!/^\d/.test(repliedMessage.content)) console.log("   - Message ne commence pas par un chiffre");
+      }
+    } catch (error) {
+      console.error("💥 Erreur:", error);
+    }
+  } else {
+    console.log("⚪ Message sans référence");
   }
 });
 client.login(token);
