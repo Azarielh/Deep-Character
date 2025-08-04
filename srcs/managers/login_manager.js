@@ -1,6 +1,6 @@
+const ds	=	require('../services/data_service.js');
 const chalk = require('chalk');
 const { config_manager } = require('./config_manager.js');
-const dm	=	require('./data_manager.js');
 
 /**
  * @brief The login_manager is in charge of :
@@ -16,9 +16,9 @@ async function login_manager(client) {
   // ✅ Traitement parallèle de toutes les guildes
 	await Promise.all(guilds.map(async (guild) => {
 		try {
-			const files_status = dm.file_set_exist(guild.id);
+			const files_status = ds.file_set_exist(guild.id);
 
-			if (!dm.build_guild_folder(guild.id))
+			if (!ds.build_guild_folder(guild.id))
 				config_manager(guild, client);
 			//FIXME: Messages de bienvenue manquants (else branch supprimée)
 	} catch (error) {

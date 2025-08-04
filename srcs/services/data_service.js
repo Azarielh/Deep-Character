@@ -18,18 +18,12 @@ const path = require("node:path");
 //TODO: Sanitiser les noms de fichiers pour éviter les injections de chemin
 //TODO: Documenter le format des fichiers de configuration
 //TODO: Ajouter des commentaires JSDoc pour toutes les fonctions publiques
-
-// function data_manager(guild, guildId, client) {
-// 	const guild_path = path.join(process.cwd(), `./guilds/${guildId}/`);
-// 	if (!fs.existsSync(guild_path)) {
-// 		fs.mkdirSync(guild_path, { recursive: true });
-// 		console.log(`Dossier créé : ${guildId}`);
-// 		config_manager(guild, client);
-// 	}
-// 	load_data(guildId, 'data_character');
-// 	// load_data(guildId, 'config');
-// 	// load_data(guildId, 'prompts');
-// }
+/**
+ * @brief Use guild.id to build the path  from ./guilds/ to guild.id requiered as an argument. Create the forlder if doesn't exist.
+ * @param guildId 
+ * @returns true  if the guildId's folder exist.
+ *			false if it's doesn't.
+ */
 function build_guild_folder(guildId) {
 	const guild_path = path.join(process.cwd(), `./guilds/${guildId}/`);
 	if (fs.existsSync(guild_path)) return true;
@@ -39,12 +33,24 @@ function build_guild_folder(guildId) {
 	return false;
 }
 
+//FIXME: Doesn't seems to work. I need better testing in order to know when and why.
+/**
+ * @brief This is supposed to build back missing files from the array returned by the function 'file_set_exist'.
+ *			Thought, this function seems broken right now and nedd check and fix.
+ * @param guildId
+ * @param missing
+ */
 function rebuild_guild_files(guildId, missing) {
 	let i = 0;
 	while (missing.length)
 		load_data(guildId, missing[i++]);
 }
 
+/**
+ * @brief This will check the existence of the three recquired file for a guild within it's dedicated folder. This fonction needs to be called only after making sure the guild folder exist in the right place.
+ * @param guildId 
+ * @returns 
+ */
 function file_set_exist(guildId) {
 	const config_path = path.join(process.cwd(), `./guilds/${guildId}/_config_${guildId}.json`);
 	const data_character_path = path.join(process.cwd(), `./guilds/${guildId}/_data_character_${guildId}.json`);

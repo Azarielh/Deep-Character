@@ -16,7 +16,7 @@ const {
 } = require('discord.js');
 
 // Custom module
-const dm = require('./data_manager.js');
+const ds = require('../services/data_service.js');
 
 // Messages multilingues pour le setup
 const embedMessages = {
@@ -146,20 +146,12 @@ async function config_manager(guild, client) {
 	collector.on('collect', async (interaction) => {
 		if (interaction.customId === 'setup_lang_fr') {
 			const frEmbed = createSetupEmbed('fr', client);
-			await interaction.update({
-				embeds: [frEmbed],
-				components: [languageButtons]
-			});
-			dm.build_guild_folder(guild.id);
-			await dm.save_Data('config', guild.id, {
-					name: guild.name,
-					id: guild.id,
-					lang: 'fr'
-				});
-			
-			// Initialiser les fichiers de données du serveur
-			dm.load_data(guild.id, 'data_character');
-			dm.load_data(guild.id, 'prompts');
+
+			await interaction.update({ embeds: [frEmbed], components: [languageButtons]});
+			ds.build_guild_folder(guild.id);
+			await ds.save_Data('config', guild.id, { name: guild.name, id: guild.id, lang: 'fr' });
+			ds.load_data(guild.id, 'data_character');
+			ds.load_data(guild.id, 'prompts');
 						
 			const frLanguageEmbed = new EmbedBuilder()
 				.setColor(0x28a745)
@@ -197,16 +189,16 @@ async function config_manager(guild, client) {
 				embeds: [enEmbed],
 				components: [languageButtons]
 			});
-			dm.build_guild_folder(guild.id);
-			await dm.save_Data('config', guild.id, {
+			ds.build_guild_folder(guild.id);
+			await ds.save_Data('config', guild.id, {
 					name: guild.name,
 					id: guild.id,
 					lang: 'en'
 				});
 			
 			// Initialiser les fichiers de données du serveur
-			dm.load_data(guild.id, 'data_character');
-			dm.load_data(guild.id, 'prompts');
+			ds.load_data(guild.id, 'data_character');
+			ds.load_data(guild.id, 'prompts');
 			const enLanguageEmbed = new EmbedBuilder()
 				.setColor(0x28a745)
 				.setTitle('🇬🇧 English language selected')
@@ -240,10 +232,10 @@ async function config_manager(guild, client) {
 			const selectedChannelId = interaction.values[0];
 			const selectedChannel = guild.channels.cache.get(selectedChannelId);
 			
-			const config = dm.load_data(guild.id, 'config');
+			const config = ds.load_data(guild.id, 'config');
 			const language = config.lang || 'fr';
 			
-			dm.save_Data('config', guild.id, {
+			ds.save_Data('config', guild.id, {
 				...config,
 				promptChannel: selectedChannelId
 			});
@@ -281,8 +273,8 @@ async function config_manager(guild, client) {
 					{
 						name: language === 'fr' ? '✅ Fonctionnalités actuelles' : '✅ Current features',
 						value: language === 'fr' 
-							? '• **Envoi de prompts** - `/inspire` - Le bot peut envoyer des prompts aléatoires ou spécifiques pour développer vos personnages\n• **Liste des prompts** - `/liste` - Affiche la liste paginée de tous les prompts disponibles\n• **Ajout de prompts** - `/add` - Permet aux admins d\'ajouter de nouveaux prompts personnalisés\n• **Modification de prompts** - `/mod` - Permet aux admins de modifier des prompts existants\n• **Système de dés** - `/roll` - Effectue des jets de dés avec nombre de faces et quantité personnalisables\n• **Configuration personnalisée** - Choix du salon de destination'
-							: '• **Prompt sending** - `/inspire` - The bot can send random or specific prompts to develop your characters\n• **Prompt listing** - `/liste` - Display paginated list of all available prompts\n• **Add prompts** - `/add` - Allows admins to add new custom prompts\n• **Modify prompts** - `/mod` - Allows admins to modify existing prompts\n• **Dice system** - `/roll` - Perform dice rolls with customizable faces and quantity\n• **Custom configuration** - Choice of destination channel',
+							? '• **Envoi de prompts** - `/inspire` - Le bot peut envoyer des prompts aléatoires ou spécifiques pour développer vos personnages\n• **Liste des prompts** - `/list` - Affiche la liste paginée de tous les prompts disponibles\n• **Ajout de prompts** - `/add` - Permet aux admins d\'ajouter de nouveaux prompts personnalisés\n• **Modification de prompts** - `/mod` - Permet aux admins de modifier des prompts existants\n• **Système de dés** - `/roll` - Effectue des jets de dés avec nombre de faces et quantité personnalisables\n• **Configuration personnalisée** - Choix du salon de destination'
+							: '• **Prompt sending** - `/inspire` - The bot can send random or specific prompts to develop your characters\n• **Prompt listing** - `/list` - Display paginated list of all available prompts\n• **Add prompts** - `/add` - Allows admins to add new custom prompts\n• **Modify prompts** - `/mod` - Allows admins to modify existing prompts\n• **Dice system** - `/roll` - Perform dice rolls with customizable faces and quantity\n• **Custom configuration** - Choice of destination channel',
 						inline: false
 					},
 					{
@@ -384,30 +376,30 @@ async function channel_selector(language, guild, channel) {
 async function setup_closure_message(language, channel, client) {
 	const closureEmbed = new EmbedBuilder()
 		.setColor(0x2ecc71)
-		.setTitle(language === 'fr' ? '🎉 Configuration terminée avec succès !' : '🎉 Configuration completed successfully!')
+		.setTitle(language === 'fr' ? '🎉 Configuration terminée avec succès !' : '🎉 Configuration completed successfully!\n')
 		.setDescription(language === 'fr' 
-			? 'Votre bot Deep-Character est maintenant configuré et prêt à être utilisé sur votre serveur !'
-			: 'Your Deep-Character bot is now configured and ready to be used on your server!')
+			? 'Votre bot Deep-Character est maintenant configuré et prêt à être utilisé sur votre serveur !\n'
+			: 'Your Deep-Character bot is now configured and ready to be used on your server!\n')
 		.addFields(
 			{
-				name: language === 'fr' ? '✅ Ce qui a été configuré' : '✅ What has been configured',
+				name: language === 'fr' ? '✅ Ce qui a été configuré' : '✅ What has been configured\n',
 				value: language === 'fr' 
-					? '• **Langue du serveur** définie\n• **Prompts standards** initialisés\n• **Channel de destination** sélectionné\n• **Permissions** configurées'
-					: '• **Server language** set\n• **Standard prompts** initialized\n• **Destination channel** selected\n• **Permissions** configured',
+					? '• **Langue du serveur** définie\n• **Prompts standards** initialisés\n• **Channel de destination** sélectionné\n'
+					: '• **Server language** set\n• **Standard prompts** initialized\n• **Destination channel** selected\n',
 				inline: false
 			},
 			{
 				name: language === 'fr' ? '🔄 Reconfiguration future' : '🔄 Future reconfiguration',
 				value: language === 'fr' 
-					? 'Si vous souhaitez modifier ces paramètres plus tard, utilisez simplement la commande `/setup` pour rouvrir ce processus de configuration.'
-					: 'If you want to modify these settings later, simply use the `/setup` command to reopen this configuration process.',
+					? 'Si vous souhaitez modifier ces paramètres plus tard, utilisez simplement la commande `/setup` pour rouvrir ce processus de configuration.\n'
+					: 'If you want to modify these settings later, simply use the `/setup` command to reopen this configuration process.\n',
 				inline: false
 			},
 			{
 				name: language === 'fr' ? '🗑️ Nettoyage' : '🗑️ Cleanup',
 				value: language === 'fr' 
-					? 'Vous pouvez maintenant fermer ce channel de configuration temporaire en cliquant sur le bouton ci-dessous.'
-					: 'You can now close this temporary configuration channel by clicking the button below.',
+					? 'Vous pouvez maintenant fermer ce channel de configuration temporaire en cliquant sur le bouton ci-dessous.\n'
+					: 'You can now close this temporary configuration channel by clicking the button below.\n',
 				inline: false
 			}
 		)

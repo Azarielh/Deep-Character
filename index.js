@@ -1,9 +1,9 @@
 const fs	=		require("node:fs"); // import node:fs library
 const path	=		require("node:path"); // import node:path witch improve path relating behaviour
 const cron	=		require("node-cron");
-const prompt_manager	 =	require('./srcs/prompt_manager.js');
-const data_manager		 =	require('./srcs/data_manager.js');
-const { login_manager }	 =	require('./srcs/login_manager.js');
+const prompt_service	 =	require('./srcs/services/prompt_service.js');
+const data_service		 =	require('./srcs/services/data_service.js');
+const { login_manager }	 =	require('./srcs/managers/login_manager.js');
 const {
   Client,
   Collection,
@@ -53,7 +53,7 @@ cron.schedule(
 	//FIXME: Channel ID "1072492463127793724" hardcodé pour le cron
 	const channel = client.channels.cache.get("1072492463127793724"); // This number is channel's ID. I'll have to make it changeable to deploy)
 	//FIXME: Cron job utilise interaction.guild alors que interaction n'existe pas dans ce contexte
-	if (channel) channel.send(prompt_manager.randomPrompt(interaction.guild).Pprompt);
+	if (channel) channel.send(prompt_service.randomPrompt(interaction.guild).Pprompt);
 	console.log("bazunga");
   },
   {
@@ -111,7 +111,7 @@ client.on("messageCreate", async (message) => {
       if (repliedMessage.author.bot && /^\d/.test(repliedMessage.content)) {
         console.log("✅ CONDITIONS REMPLIES - Traitement en cours");
         
-        const data = data_manager.load_data(message.guild.id, "data_character");
+        const data = data_service.load_data(message.guild.id, "data_character");
         console.log("📂 Données chargées:", Object.keys(data).length, "utilisateurs");
 
 		const userKey = `${message.author.username}-${message.author.id}`; // create a user key as "pseudo-id"
@@ -139,7 +139,7 @@ client.on("messageCreate", async (message) => {
 		  console.log("➕ Réponse ajoutée au prompt existant");
 		}
 
-		data_manager.save_Data("data_character", message.guild.id, data);
+		data_service.save_Data("data_character", message.guild.id, data);
 		console.log("💾 Données sauvegardées");
 
 		// Tu peux envoyer une réponse dans le canal si tu le souhaites

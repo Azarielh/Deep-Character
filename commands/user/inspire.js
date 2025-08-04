@@ -1,6 +1,6 @@
 const fs = require("node:fs");
 const { SlashCommandBuilder } = require("discord.js");
-const prompt_manager = require('../../srcs/prompt_manager.js');
+const prompt_service = require('../../srcs/services/prompt_service.js');
 
 module.exports = {
 data: new SlashCommandBuilder()
@@ -18,10 +18,10 @@ data: new SlashCommandBuilder()
 	let Pnumber = interaction.options.getString("index");
 	try {
 		if (Pnumber) {
-			const prompt = prompt_manager.getPromptByIndex(parseInt(Pnumber), interaction.guild);
+			const prompt = prompt_service.getPromptByIndex(parseInt(Pnumber), interaction.guild);
 			await interaction.reply({content: `${Pnumber} : ${prompt.Pprompt}`});
 		} else {
-			const prompt = prompt_manager.randomPrompt(interaction.guild);
+			const prompt = prompt_service.randomPrompt(interaction.guild);
 			await interaction.reply({content:`${prompt.num} : ${prompt.Pprompt}`});
 	
 		}

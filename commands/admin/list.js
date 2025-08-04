@@ -1,31 +1,26 @@
 const fs = require('node:fs');
+const path = require('node:path');
 const { SlashCommandBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { ActionRowBuilder } = require('@discordjs/builders');
-
-// Load prompts from JSON file
-const jsonprompt = JSON.parse(fs.readFileSync('prompts_fr.json', 'utf-8'));
-
-try {
-    console.log('Prompts loaded successfully:');
-} catch (error) {
-    console.error('Error loading prompts:', error);
-    return;
-}
 
 // Command definition
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('liste')
+        .setName('list')
         .setDescription('Affiche la liste des prompts'),
 
     async execute(interaction) {
-        await liste(interaction, 0);
+        await list(interaction, 0);
     }
 };
 
 // Function to handle listing and pagination
-async function liste(interaction, startIndex = 0) {
+async function list(interaction, startIndex = 0) {
     try {
+        // Load prompts dynamically for the guild
+        const filepath = path.join(process.cwd(), `./guilds/${interaction.guild.id}/_prompts_${interaction.guild.id}.json`);
+        const jsonprompt = JSON.parse(fs.readFileSync(filepath, 'utf-8'));
+        
         if (startIndex < 0) startIndex = 0;  
         if (startIndex >= jsonprompt.length) startIndex = jsonprompt.length - 10;
 
@@ -59,6 +54,11 @@ async function liste(interaction, startIndex = 0) {
         const collector = interaction.channel.createMessageComponentCollector({ filter, time: 500000 });
 
         collector.on('collect', async i => {
+            // Reload prompts for updated data
+            const filepath = path.join(process.cwd(), `./guilds/${interaction.guild.id}/_prompts_${interaction.guild.id}.json`);
+            const jsonprompt = JSON.parse(fs.readFileSync(filepath, 'utf-8'));
+            const totalPrompts = jsonprompt.length;
+            
             if (i.customId === 'precedent') {
                 startIndex -= 10;
             } else if (i.customId === 'suivant') {

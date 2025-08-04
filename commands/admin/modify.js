@@ -1,7 +1,7 @@
 const fs = require("node:fs");
 const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
 const wait = require("node:timers/promises").setTimeout;
-const prompt_manager = require('../../srcs/prompt_manager.js')
+const prompt_service = require('../../srcs/services/prompt_service.js')
 
 //Créer la commande
 module.exports = {
@@ -41,7 +41,7 @@ module.exports = {
 	}
 	//Ajouter le nouveau prompt au json
 	try {
-	  prompt_manager.change_it(Pnum, dpprompt, guild);
+	  prompt_service.change_it(Pnum, dpprompt, guild);
 	} catch (error) {
 	  console.error(error);
 	  await interaction.editReply(
