@@ -26,7 +26,7 @@ const embedMessages = {
 		fields: [
 			{
 				name: '### 📋 Que fait ce channel ?',
-				value: '• **Configuration des paramètres du bot**\n• **Choix de la langue (français/anglais)**\n•**Initialisation des prompts standards dans la langue choisie.**\n• **Définition des rôles et permissions**\n\n',
+				value: '• **Configuration des paramètres du bot**\n• **Choix de la langue (français/anglais)**\n• **Initialisation des prompts standards dans la langue choisie.**\n• **Définition des rôles et permissions**\n\n',
 				inline: false
 			},
 			{
@@ -53,26 +53,26 @@ const embedMessages = {
 	},
 	en: {
 		title: '# 🎭 Welcome to Deep-Character Setup!',
-		description: '## This temporary channel will allow you to configure your Deep-Character bot.',
+		description: '## This temporary channel will allow you to configure your Deep-Character bot.\n',
 		fields: [
 			{
 				name: '### 📋 What does this channel do?',
-				value: '• **Bot parameters configuration**\n• **Language choice (French/English)**\n•**Standards prompts in the languages you choosed**\n• **Roles and permissions definition**\n',
+				value: '• **Bot parameters configuration**\n• **Language choice (French/English)**\n• **Standards prompts in the languages you choosed**\n• **Roles and permissions definition**\n\n',
 				inline: false
 			},
 			{
 				name: '### ⚙️ How to proceed?',
-				value: '**Use the buttons and menus below to configure your bot according to your preferences. Each step will be guided.**',
+				value: '**Use the buttons and menus below to configure your bot according to your preferences. Each step will be guided.**\n\n',
 				inline: false
 			},
 			{
 				name: '### 🗑️ Automatic deletion',
-				value: '**This channel will automatically delete itself once the configuration is completed.**',
+				value: '**This channel will automatically delete itself once the configuration is completed.**\n\n',
 				inline: false
 			},
 			{
 				name: '### 🔄 Reconfiguration',
-				value: '**Need to modify the configuration later? Use the `/setup` command to reopen this channel.**',
+				value: '**Need to modify the configuration later? Use the `/setup` command to reopen this channel.**\n\n',
 				inline: false
 			}
 		]
@@ -156,21 +156,21 @@ async function config_manager(guild, client) {
 			const frLanguageEmbed = new EmbedBuilder()
 				.setColor(0x28a745)
 				.setTitle('🇫🇷 Langue française sélectionnée')
-				.setDescription('Maintenant que vous avez choisi le français, j\'ai assigné un fichier de prompts standards pour votre serveur.')
+				.setDescription('Maintenant que vous avez choisi le français, j\'ai assigné un fichier de prompts standards pour votre serveur.\n')
 				.addFields(
 					{
 						name: '📝 À propos des prompts standards',
-						value: 'Ces prompts sont supposés être universels et devraient fonctionner pour tout type d\'univers allant du médiéval (ou antérieur) au futur lointain, avec ou sans magie.',
+						value: 'Ces prompts sont supposés être universels et devraient fonctionner pour tout type d\'univers allant du médiéval (ou antérieur) au futur lointain, avec ou sans magie.\n',
 						inline: false
 					},
 					{
 						name: '💬 Besoin d\'aide ?',
-						value: 'Si vous trouvez quelque chose qui ne vous semble pas correspondre à ces standards, n\'hésitez pas à me contacter.',
+						value: 'Si vous trouvez quelque chose qui ne vous semble pas correspondre à ces standards, n\'hésitez pas à me contacter.\n',
 						inline: false
 					},
 					{
 						name: '🎯 Prochaine étape',
-						value: 'À partir de maintenant, vous pouvez ajouter vos propres prompts pour avoir des prompts spécifiques à votre univers.',
+						value: 'À partir de maintenant, vous pouvez ajouter vos propres prompts pour avoir des prompts spécifiques à votre univers.\n',
 						inline: false
 					}
 				)
@@ -202,21 +202,21 @@ async function config_manager(guild, client) {
 			const enLanguageEmbed = new EmbedBuilder()
 				.setColor(0x28a745)
 				.setTitle('🇬🇧 English language selected')
-				.setDescription('Now that you choosed English, I\'ve assigned a standard prompt\'s file for your guild.')
+				.setDescription('Now that you choosed English, I\'ve assigned a standard prompt\'s file for your guild.\n')
 				.addFields(
 					{
 						name: '📝 About standard prompts',
-						value: 'Those prompts are supposed to be universal and should work for any kind of world going from medieval (or earlier) to far future and with or without magic.',
+						value: 'Those prompts are supposed to be universal and should work for any kind of world going from medieval (or earlier) to far future and with or without magic.\n',
 						inline: false
 					},
 					{
 						name: '💬 Need help?',
-						value: 'Please if you find anything you feel doesn\'t qualify as such standard, feel free to contact me.',
+						value: 'Please if you find anything you feel doesn\'t qualify as such standard, feel free to contact me.\n',
 						inline: false
 					},
 					{
 						name: '🎯 Next step',
-						value: 'From now on you can add your own prompts so you can have specific prompts for your world.',
+						value: 'From now on you can add your own prompts so you can have specific prompts for your world.\n',
 						inline: false
 					}
 				)
@@ -245,14 +245,14 @@ async function config_manager(guild, client) {
 				.setColor(0x17a2b8)
 				.setTitle(language === 'fr' ? '✅ Configuration terminée !' : '✅ Configuration completed!')
 				.setDescription(language === 'fr' 
-					? `Le salon **${selectedChannel.name}** a été sélectionné pour recevoir les prompts.`
-					: `The **${selectedChannel.name}** channel has been selected to receive prompts.`)
+					? `Le salon **${selectedChannel.name}** a été sélectionné pour recevoir les prompts.\n`
+					: `The **${selectedChannel.name}** channel has been selected to receive prompts.\n`)
 				.addFields(
 					{
 						name: language === 'fr' ? '⚠️ Limitations actuelles' : '⚠️ Current limitations',
 						value: language === 'fr' 
-							? 'Actuellement, le bot ne permet pas d\'autres options de configuration disponibles via ce channel. Nous nous en excusons.'
-							: 'Currently, the bot does not allow other configuration options available through this channel. We apologize for this.',
+							? 'Actuellement, le bot ne permet pas d\'autres options de configuration disponibles via ce channel. Nous nous en excusons.\n'
+							: 'Currently, the bot does not allow other configuration options available through this channel. We apologize for this.\n',
 						inline: false
 					}
 				)
@@ -267,28 +267,28 @@ async function config_manager(guild, client) {
 				.setColor(0x6f42c1)
 				.setTitle(language === 'fr' ? '🚀 Fonctionnalités & Roadmap' : '🚀 Features & Roadmap')
 				.setDescription(language === 'fr' 
-					? 'Voici ce qui est disponible maintenant et ce qui arrive bientôt !'
-					: 'Here\'s what\'s available now and what\'s coming soon!')
+					? 'Voici ce qui est disponible maintenant et ce qui arrive bientôt !\n'
+					: 'Here\'s what\'s available now and what\'s coming soon!\n')
 				.addFields(
 					{
 						name: language === 'fr' ? '✅ Fonctionnalités actuelles' : '✅ Current features',
 						value: language === 'fr' 
-							? '• **Envoi de prompts** - `/inspire` - Le bot peut envoyer des prompts aléatoires ou spécifiques pour développer vos personnages\n• **Liste des prompts** - `/list` - Affiche la liste paginée de tous les prompts disponibles\n• **Ajout de prompts** - `/add` - Permet aux admins d\'ajouter de nouveaux prompts personnalisés\n• **Modification de prompts** - `/mod` - Permet aux admins de modifier des prompts existants\n• **Système de dés** - `/roll` - Effectue des jets de dés avec nombre de faces et quantité personnalisables\n• **Configuration personnalisée** - Choix du salon de destination'
-							: '• **Prompt sending** - `/inspire` - The bot can send random or specific prompts to develop your characters\n• **Prompt listing** - `/list` - Display paginated list of all available prompts\n• **Add prompts** - `/add` - Allows admins to add new custom prompts\n• **Modify prompts** - `/mod` - Allows admins to modify existing prompts\n• **Dice system** - `/roll` - Perform dice rolls with customizable faces and quantity\n• **Custom configuration** - Choice of destination channel',
+							? '• **Envoi de prompts** - `/inspire` - Le bot peut envoyer des prompts aléatoires ou spécifiques pour développer vos personnages\n• **Liste des prompts** - `/list` - Affiche la liste paginée de tous les prompts disponibles\n• **Ajout de prompts** - `/add` - Permet aux admins d\'ajouter de nouveaux prompts personnalisés\n• **Modification de prompts** - `/mod` - Permet aux admins de modifier des prompts existants\n• **Système de dés** - `/roll` - Effectue des jets de dés avec nombre de faces et quantité personnalisables\n• **Configuration personnalisée** - Choix du salon de destination\n'
+							: '• **Prompt sending** - `/inspire` - The bot can send random or specific prompts to develop your characters\n• **Prompt listing** - `/list` - Display paginated list of all available prompts\n• **Add prompts** - `/add` - Allows admins to add new custom prompts\n• **Modify prompts** - `/mod` - Allows admins to modify existing prompts\n• **Dice system** - `/roll` - Perform dice rolls with customizable faces and quantity\n• **Custom configuration** - Choice of destination channel\n',
 						inline: false
 					},
 					{
 						name: language === 'fr' ? '🔮 Fonctionnalités prévues' : '🔮 Planned features',
 						value: language === 'fr' 
-							? '• **Création de personnage** - Création complète depuis Discord\n• **Système de tags** - Catégoriser les prompts par tags pour un filtrage avancé\n• **Suivi des réponses** - Accès aux réponses des joueurs pour les MJ\n• **Feedback système** - Communication MJ ↔ Joueurs sur les réponses\n• **Quiz d\'univers** - Jeux de questions personnalisés selon l\'univers du serveur\n• **Système de salaire** - Revenus automatiques selon le métier\n• **Boutique intégrée** - Système d\'achat et vente'
-							: '• **Character creation** - Complete creation from Discord\n• **Tag system** - Categorize prompts by tags for advanced filtering\n• **Response tracking** - Access to player responses for GMs\n• **Feedback system** - GM ↔ Player communication on responses\n• **Universe quiz** - Custom quiz games based on server\'s universe\n• **Salary system** - Automatic income based on job\n• **Integrated shop** - Buy and sell system',
+							? '• **Création de personnage** - Création complète depuis Discord\n• **Système de tags** - Catégoriser les prompts par tags pour un filtrage avancé\n• **Suivi des réponses** - Accès aux réponses des joueurs pour les MJ\n• **Feedback système** - Communication MJ ↔ Joueurs sur les réponses\n• **Quiz d\'univers** - Jeux de questions personnalisés selon l\'univers du serveur\n• **Système de salaire** - Revenus automatiques selon le métier\n• **Boutique intégrée** - Système d\'achat et vente\n'
+							: '• **Character creation** - Complete creation from Discord\n• **Tag system** - Categorize prompts by tags for advanced filtering\n• **Response tracking** - Access to player responses for GMs\n• **Feedback system** - GM ↔ Player communication on responses\n• **Universe quiz** - Custom quiz games based on server\'s universe\n• **Salary system** - Automatic income based on job\n• **Integrated shop** - Buy and sell system\n',
 						inline: false
 					},
 					{
 						name: language === 'fr' ? '💡 Une idée ? Un bug ?' : '💡 An idea? A bug?',
 						value: language === 'fr' 
-							? 'N\'hésitez pas à contacter le développeur pour toute suggestion ou problème rencontré !'
-							: 'Feel free to contact the developer for any suggestions or issues encountered!',
+							? 'N\'hésitez pas à contacter le développeur pour toute suggestion ou problème rencontré !\n'
+							: 'Feel free to contact the developer for any suggestions or issues encountered!\n',
 						inline: false
 					}
 				)
@@ -376,13 +376,13 @@ async function channel_selector(language, guild, channel) {
 async function setup_closure_message(language, channel, client) {
 	const closureEmbed = new EmbedBuilder()
 		.setColor(0x2ecc71)
-		.setTitle(language === 'fr' ? '🎉 Configuration terminée avec succès !' : '🎉 Configuration completed successfully!\n')
+		.setTitle(language === 'fr' ? '🎉 Configuration terminée avec succès !' : '🎉 Configuration completed successfully!')
 		.setDescription(language === 'fr' 
 			? 'Votre bot Deep-Character est maintenant configuré et prêt à être utilisé sur votre serveur !\n'
 			: 'Your Deep-Character bot is now configured and ready to be used on your server!\n')
 		.addFields(
 			{
-				name: language === 'fr' ? '✅ Ce qui a été configuré' : '✅ What has been configured\n',
+				name: language === 'fr' ? '✅ Ce qui a été configuré' : '✅ What has been configured',
 				value: language === 'fr' 
 					? '• **Langue du serveur** définie\n• **Prompts standards** initialisés\n• **Channel de destination** sélectionné\n'
 					: '• **Server language** set\n• **Standard prompts** initialized\n• **Destination channel** selected\n',

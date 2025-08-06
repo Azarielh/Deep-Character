@@ -1,0 +1,542 @@
+[
+    {
+        "num": 1,
+        "tag": "standard",
+        "Pprompt": "Est-ce que ton personnage connaît tout ses cousins et cousines?"
+    },
+    {
+        "num": 2,
+        "tag": "standard",
+        "Pprompt": "Ton personnage est-il proche d'une cousine ou d'un cousin en particulier?"
+    },
+    {
+        "num": 3,
+        "tag": "standard",
+        "Pprompt": "Tu rentres dans une pièce où tes meilleurs potes sont en train parlé. Tu n'as aucune idée de quoi ils paralaient mais quand ils t'ont vu ils se sont arrêté net. Comment réagrait ton personnage dans cette situation? Que penserait-il?"
+    },
+    {
+        "num": 4,
+        "tag": "standard",
+        "Pprompt": "Arrive t-il à ton personnage de cuisiné? Quelle est son plat le plus élaboré?"
+    },
+    {
+        "num": 5,
+        "tag": "standard",
+        "Pprompt": "Ton personnage a t-il des petits \"toc\" ou rituels qui pourrait sembler ridicule ou étranges aux yeux des autres"
+    },
+    {
+        "num": 6,
+        "tag": "standard",
+        "Pprompt": "Quel le plus grand regret de ton personnage?"
+    },
+    {
+        "num": 7,
+        "tag": "standard",
+        "Pprompt": "Enfant, on a tous eu un ou des etits secrets mignon qu'on a pas toujours partagé. Pense à ceux que pourrait avoir eu ton personnage."
+    },
+    {
+        "num": 8,
+        "tag": "standard",
+        "Pprompt": "Ton personnage arrive en retard à un entretien profesionnel important. Avez vous déjà pensé quelle serait son attitude dans cette situation?"
+    },
+    {
+        "num": 9,
+        "tag": "standard",
+        "Pprompt": "Ton personnage apprend qu'on l'a aimer secretement pendant des années sans qu'il ne se rendent compte. Comment réagit-il si c'est réciproque? Et si ça ne l'est pas?"
+    },
+    {
+        "num": 10,
+        "tag": "standard",
+        "Pprompt": "Ton personnage a entendu d'étrange rumeur sur une personnalité nationnale, toutes plus inquiétantes les unes que les autres. Comment réagit-il lorsqu'il le rencontre?"
+    },
+    {
+        "num": 11,
+        "tag": "standard",
+        "Pprompt": "Un parfait étranger se fait tabasser par un autre au détour d'une ruelle devant votre personnage. Quelle est votre réaction?"
+    },
+    {
+        "num": 12,
+        "tag": "standard",
+        "Pprompt": "Que ferais-ton personnage face à un vampire en pleine nuit ?"
+    },
+    {
+        "num": 13,
+        "tag": "standard",
+        "Pprompt": "Sais-tu à qui ton personnage ne devrais pas te fier ?"
+    },
+    {
+        "num": 14,
+        "tag": "standard",
+        "Pprompt": "Et si ton personnage faisais un truc fou ?"
+    },
+    {
+        "num": 15,
+        "tag": "standard",
+        "Pprompt": "Parfois, juste se taire c'est bien aussi... tu ne trouves pas ?"
+    },
+    {
+        "num": 16,
+        "tag": "standard",
+        "Pprompt": "Quel personnage pourrait avoir raison du tien facilement ?"
+    },
+    {
+        "num": 17,
+        "tag": "standard",
+        "Pprompt": "Dans quel lit as-tu dormi ?"
+    },
+    {
+        "num": 18,
+        "tag": "standard",
+        "Pprompt": "Quelle est sa kryptonite?"
+    },
+    {
+        "num": 19,
+        "tag": "standard",
+        "Pprompt": "Es-tu sûr que cette action est intelligente ?"
+    },
+    {
+        "num": 20,
+        "tag": "standard",
+        "Pprompt": "Et si ton personnage était transformé en mort-vivant ?"
+    },
+    {
+        "num": 21,
+        "tag": "standard",
+        "Pprompt": "Une course pour devenir maitre du royaume ça te dit ?"
+    },
+    {
+        "num": 22,
+        "tag": "standard",
+        "Pprompt": "Ton personnage a t-il honte d'avouer qu'il a coucher un-e de ses conquêtes?"
+    },
+    {
+        "num": 23,
+        "tag": "standard",
+        "Pprompt": "Est-ce que ton personnage vendrait son âme au diable ?"
+    },
+    {
+        "num": 24,
+        "tag": "standard",
+        "Pprompt": "Que répondrait ton personnage : \"Pensez-vous qu'il est sain de vénérer quelquechose, ou quelqu'un ?\""
+    },
+    {
+        "num": 25,
+        "tag": "standard",
+        "Pprompt": "On offre à ton perso, 3 voeux. Cela peut être absolument tout ce qu'il veut à l'exeption de ramener quelqu'un à la vie et d'avoir plus de voeux"
+    },
+    {
+        "num": 26,
+        "tag": "standard",
+        "Pprompt": "Ton perso doit choisir entre sauver un enfant et manger sa mère, ou sauver sa mère et manger un enfant. Quel est son choix?"
+    },
+    {
+        "num": 27,
+        "tag": "standard",
+        "Pprompt": "Ton personnage est suivi par un chat noir, que fait-il ?"
+    },
+    {
+        "num": 28,
+        "tag": "standard",
+        "Pprompt": "La cuillère n'existe pas."
+    },
+    {
+        "num": 29,
+        "tag": "standard",
+        "Pprompt": "Si ton personnage en a gros sur la patate, comment le fait-il savoir ?"
+    },
+    {
+        "num": 30,
+        "tag": "standard",
+        "Pprompt": "Envie de jouer quelque chose d'original ? tablez sur les espèces les moins jouées"
+    },
+    {
+        "num": 31,
+        "tag": "standard",
+        "Pprompt": "Si tu étais un sorcier, quels seraient tes pouvoirs innés (personnels) ?"
+    },
+    {
+        "num": 32,
+        "tag": "standard",
+        "Pprompt": "pour quel objet craquerais ton personnage ?"
+    },
+    {
+        "num": 33,
+        "tag": "standard",
+        "Pprompt": "Pour quel type de personne craquerait ton personnage ?"
+    },
+    {
+        "num": 34,
+        "tag": "standard",
+        "Pprompt": "Plutôt héros, anti-héros, lambda ou vilain ?"
+    },
+    {
+        "num": 35,
+        "tag": "standard",
+        "Pprompt": "Si ton personnage devait mourir, en quoi le vois-tu se réincarner ?"
+    },
+    {
+        "num": 36,
+        "tag": "standard",
+        "Pprompt": "Si tu pouvais faire une chose à un autre personnage sans que jamais il ne puisse répliquer, que ferais-tu et à qui ?"
+    },
+    {
+        "num": 37,
+        "tag": "standard",
+        "Pprompt": "Aimerais-tu être le centre d'une trame secondaire ?"
+    },
+    {
+        "num": 38,
+        "tag": "standard",
+        "Pprompt": "Aimerais-tu prendre part à une trame secondaire ou préfères-tu participer à un event de plus grande envergure ?"
+    },
+    {
+        "num": 39,
+        "tag": "standard",
+        "Pprompt": "De quelle contrée de monde vient ton personnage ?"
+    },
+    {
+        "num": 40,
+        "tag": "standard",
+        "Pprompt": "Est-ce que son physique et son espèce sont cohérentes avec son lieu d'origine ?"
+    },
+    {
+        "num": 41,
+        "tag": "standard",
+        "Pprompt": "Le métier de ton personnage a t-il un rapport avec celui dont il rêvait quand il était enfant?"
+    },
+    {
+        "num": 42,
+        "tag": "standard",
+        "Pprompt": "Quel est le pire cauchemard de ton personnage?"
+    },
+    {
+        "num": 43,
+        "tag": "standard",
+        "Pprompt": "Quel est le pire cauchemard qu'a fait ton personnage?"
+    },
+    {
+        "num": 44,
+        "tag": "standard",
+        "Pprompt": "imagine un nouveau pnj lié à ton personnage. Il peut être discret mais important. Ou très présent mais anodin. A toi de voir."
+    },
+    {
+        "num": 45,
+        "tag": "standard",
+        "Pprompt": "Ton personnage a t-il déjà eu des animaux de compagnie? S'il devait en acheter un aujourd'hui, quel serait-il?"
+    },
+    {
+        "num": 46,
+        "tag": "standard",
+        "Pprompt": "Il y a t-il un rêve cher a ton personnage qu'il a pourtant abandonné?"
+    },
+    {
+        "num": 47,
+        "tag": "standard",
+        "Pprompt": "As-tu déjà penser à jouer tonn personnage dans une trame secondaire en tant qu'assistant ou antagoniste mineur d'un autre personnage?"
+    },
+    {
+        "num": 48,
+        "tag": "standard",
+        "Pprompt": "Quelle est la première chose que fait systématiquement ton personnage quand il se lève le matin?"
+    },
+    {
+        "num": 49,
+        "tag": "standard",
+        "Pprompt": "Quelle est la plus grande vertu de ton personnage ?"
+    },
+    {
+        "num": 50,
+        "tag": "standard",
+        "Pprompt": "Quel est le pire vice de ton personnage ?"
+    },
+    {
+        "num": 51,
+        "tag": "standard",
+        "Pprompt": "De quel type MBTI est ton personnage ?"
+    },
+    {
+        "num": 52,
+        "tag": "standard",
+        "Pprompt": "Quel but poursuit ton personnage ?"
+    },
+    {
+        "num": 53,
+        "tag": "standard",
+        "Pprompt": "Quelle serait la vie rêvée de ton personnage ?"
+    },
+    {
+        "num": 54,
+        "tag": "standard",
+        "Pprompt": "Que ferait ton personnage si il se faisait transformer en un petit rongeur ?"
+    },
+    {
+        "num": 55,
+        "tag": "standard",
+        "Pprompt": "En quoi l'enfance de ton personnage a pu être déterminante ?"
+    },
+    {
+        "num": 56,
+        "tag": "standard",
+        "Pprompt": "Quel est le plat préféré de ton personnage ?"
+    },
+    {
+        "num": 57,
+        "tag": "standard",
+        "Pprompt": "Quelles sont les couleurs préférées de ton personnage et pourquoi ?"
+    },
+    {
+        "num": 58,
+        "tag": "standard",
+        "Pprompt": "Ton personnage pardonne-t-il facilement ?"
+    },
+    {
+        "num": 59,
+        "tag": "standard",
+        "Pprompt": "Ton personnage est-il plutôt introverti ou extraverti ?"
+    },
+    {
+        "num": 60,
+        "tag": "standard",
+        "Pprompt": "Ton personnage est-il alphabète ? (sait-il lire et écrire ?)"
+    },
+    {
+        "num": 61,
+        "tag": "standard",
+        "Pprompt": "Quelle est la scène la plus croustillante ou gênante à laquelle ton personnage a été secretement témoin?"
+    },
+    {
+        "num": 62,
+        "tag": "standard",
+        "Pprompt": "Ton personnage se réveille un matin dans un lieu inconnu et attaché dans le coin d'une pièce sombre. Quelle est sa réaction?"
+    },
+    {
+        "num": 63,
+        "tag": "standard",
+        "Pprompt": "Si tu devais classer les 5 vices les plus prononcés de ton personnages..."
+    },
+    {
+        "num": 64,
+        "tag": "standard",
+        "Pprompt": "As tu une annecdote gênante sur son apprentissage de la magie?"
+    },
+    {
+        "num": 65,
+        "tag": "standard",
+        "Pprompt": "Qu'est ce que ton personnage fait quand il a du temps libre?"
+    },
+    {
+        "num": 66,
+        "tag": "standard",
+        "Pprompt": "Votre personnage apprend que le jeune enfant de l'un de ses voisins est un sorcier. Est-ce qu'il y croit? Comment réagit et agit-il face à cette révélation?"
+    },
+    {
+        "num": 67,
+        "tag": "standard",
+        "Pprompt": "Votre personnage croit être un sorcier? Est-ce possible? Unique? Se pourrait-il que ce soit sujet à des hallucinations?"
+    },
+    {
+        "num": 68,
+        "tag": "standard",
+        "Pprompt": "Raconte une situation ou ton personnage aurait pu sauver la vie de quelqu'un ou au moins l'empêcher de se blesser gravement mais volontairement ou non, il ne l'a pas fait; pourquoi."
+    },
+    {
+        "num": 69,
+        "tag": "standard",
+        "Pprompt": "Dans l'un des lieux d'apprentissage de ton personnage, rappelle toi d'une racaille qui a fait son boss une fois de trop et qui l'a payé salement."
+    },
+    {
+        "num": 70,
+        "tag": "standard",
+        "Pprompt": "A quoi ressemble la région du monde d'où vient ton personnage ? N'hésite pas à poser des question à ton mj s'il te manque des informations. "
+    },
+    {
+        "num": 71,
+        "tag": "standard",
+        "Pprompt": "Ton personnage a t-il déjà vu quelqu'un se noyer?"
+    },
+    {
+        "num": 72,
+        "tag": "standard",
+        "Pprompt": "Ton perso boit tranquillement un verre dans une taverne quand soudain, quelqu'un de la table d'a coté semble avoir avalé quelque chose de travers. Autour, il y a ceux qui voudraient faire quelque chose mais qui ignore quoi et se contente de panaiquer ou d'appelé à l'aide. Il y a ceux qui s'amuse de la situation et d'autres qui détourne l'attention l'air de rien. Que fait votre personnage?"
+    },
+    {
+        "num": 73,
+        "tag": "standard",
+        "Pprompt": "Qu'est ce qui peut pousser votre personnage à plonger dans l'eau d'un lac couvert de glace?"
+    },
+    {
+        "num": 74,
+        "tag": "standard",
+        "Pprompt": "Votre personnage a t-il un vêtement ou un bijoux qu'il n'aime pas mais qu'il garde par valeur sentimentale?"
+    },
+    {
+        "num": 75,
+        "tag": "standard",
+        "Pprompt": "Ton personnage tombe dans une embuscade. Tout de suite, il est évident que lui et la bande de bras cassé qui l'accompagne ne feront pas le poids contre l'ennemi. Ses compagnons se rendent sans discuter. Est-il plutôt du genre à se rendre de lui même? Se jeter dans le combat ? Ou suivre le mouvement de ses compagnons?"
+    },
+    {
+        "num": 76,
+        "tag": "standard",
+        "Pprompt": "Je suis ton père"
+    },
+    {
+        "num": 77,
+        "tag": "standard",
+        "Pprompt": "Ton personnage est missionné par le roi pour enseigné au prince . Accepte t'il ?"
+    },
+    {
+        "num": 78,
+        "tag": "standard",
+        "Pprompt": "Dans la foule un manant fait tomber une pièce sans s'en rendre compte. Que fait ton personnage? Il la lui tend? Il la garde pour lui ou la laisse trainer?"
+    },
+    {
+        "num": 79,
+        "tag": "standard",
+        "Pprompt": "Défini 1 partenaire idéal pour ton personnage.  Quelle est son apparence? Quel sont ses hobbies? Quelles ambitions? Tu l'as? Maintenant, parmi les PJ ou PNJ rencontré par ton personnage. Lequel correspond le plus à ses critères? Et si ce n'est pas le même qui fait battre son coeur, pourquoi? et qu'est ce qui les diffèrent?"
+    },
+    {
+        "num": 80,
+        "tag": "standard",
+        "Pprompt": "Ton personnage se réveille un matin attaché dans ce qui semble être une cave. Les souvenirs lui remonte. Il a été pris en embuscade avec le reste de son groupe. S'inquiète t-il du reste de son groupe? Pourquoi pense t-il qu'on l'a laissé en vie? Attends t-il l'arrivée de ses ravisseurs avant de tenter de s'échapper?"
+    },
+    {
+        "num": 81,
+        "tag": "standard",
+        "Pprompt": "Réfléchis à une nouvelle relation amoureuse qu'a eu ton personnage. Comment a t-il rencontré cette personne? Comment cette histoire a commencé? Finie? Et surtout qu'a appris ton personnage depuis cette relation?"
+    },
+    {
+        "num": 82,
+        "tag": "standard",
+        "Pprompt": "Ton personnage est-il déjà aller au marché noir? Si oui, est-ce occasionnel ou une habitude? Pour quelle raison se rend t-il là bas?"
+    },
+    {
+        "num": 83,
+        "tag": "standard",
+        "Pprompt": "De tous les lieux visité par ton personnages, quel est son lieu préféré? Où a t-il créer ses plus beaux souvenirs?"
+    },
+    {
+        "num": 84,
+        "tag": "standard",
+        "Pprompt": "Seul dans la nature. Ton personnage a t-il le savoir faire et le savoir pour survivre? Combien de temps faut-il a ton personnage pour la solitude pèse lourd sur son coeur?"
+    },
+    {
+        "num": 85,
+        "tag": "standard",
+        "Pprompt": "Un enfant de la rue vient de réussir à s'emparer de sa bourse. Comment ton personnage gère t-il la situation?"
+    },
+    {
+        "num": 86,
+        "tag": "standard",
+        "Pprompt": "Ton personnage a t-il une once de compassion envers les mendiants?"
+    },
+    {
+        "num": 87,
+        "tag": "standard",
+        "Pprompt": "Ton personnage a t-il déjà eu l'occasion de manger un plat à base d'insecte?"
+    },
+    {
+        "num": 88,
+        "tag": "standard",
+        "Pprompt": "A quel point ton personnage a t-il été proche de la mort actuellement? Qu'a t-il ressenti à ce moment là?"
+    },
+    {
+        "num": 89,
+        "tag": "standard",
+        "Pprompt": "Si ton personnage était un animal, que serait-il ?"
+    },
+    {
+        "num": 90,
+        "tag": "standard",
+        "Pprompt": "Si ton personnage était une musique, que serait-il?"
+    },
+    {
+        "num": 91,
+        "tag": "standard",
+        "Pprompt": "Si ton personnage était un aliment, que serait-il?"
+    },
+    {
+        "num": 92,
+        "tag": "standard",
+        "Pprompt": "Si ton personnage était un genre de film, que serait-il?"
+    },
+    {
+        "num": 93,
+        "tag": "standard",
+        "Pprompt": "Si ton personnage était un genre de musique, que serait-il?"
+    },
+    {
+        "num": 94,
+        "tag": "standard",
+        "Pprompt": "Si ton personnage était un ingame, que serait-il?"
+    },
+    {
+        "num": 95,
+        "tag": "standard",
+        "Pprompt": "Si ton personnage était un lieu IRL, que serati-il?"
+    },
+    {
+        "num": 96,
+        "tag": "standard",
+        "Pprompt": "Si ton personnage était un arbre, que serait-il?"
+    },
+    {
+        "num": 97,
+        "tag": "standard",
+        "Pprompt": "Un groupe extrémiste s'en prends à un enfant suspecté d'être sorcier en le maltraitant sans retenue en beau milieu de la rue. Ton personnage est témoin de la scène. Que fait-il?"
+    },
+    {
+        "num": 98,
+        "tag": "standard",
+        "Pprompt": "Comment ton personnage réagit à un défi provocateur qui pourrait mettre sa vie en danger s'il sait qu'il ne fait pas le poids face à ton adversaire?"
+    },
+    {
+        "num": 99,
+        "tag": "standard",
+        "Pprompt": "Ton personnage est approché par un groupuscule secret. Penses à quelques raisons qui pourrait l'expliquer et quel genre de goupes secret pourrait s'intéresser à lui."
+    },
+    {
+        "num": 100,
+        "tag": "standard",
+        "Pprompt": "Fuyez ! Pauvre fous !"
+    },
+    {
+        "num": 101,
+        "tag": "standard",
+        "Pprompt": "Et si ton personnage tombait enceinte? Ou si c'est un homme, que ferait-il si sa partenaire/femme tombait enceinte?"
+    },
+    {
+        "num": 102,
+        "tag": "standard",
+        "Pprompt": "Ton personnage est témoin d'une tentative d'extorsion. Comment agit-il?"
+    },
+    {
+        "num": 103,
+        "tag": "standard",
+        "Pprompt": "Dans quel type de logement habite ton personnage?"
+    },
+    {
+        "num": 104,
+        "tag": "standard",
+        "Pprompt": "Décris le logement de ton personnage en quelques mots."
+    },
+    {
+        "num": 105,
+        "tag": "standard",
+        "Pprompt": "Ton perso à la possibilité de sauvé la vie d'un enfant. Mais il y a de forte chance que ce geste héroïque  lui coute la vie. Que fait-il?"
+    },
+    {
+        "num": 106,
+        "tag": "standard",
+        "Pprompt": "T'es tu renseigné sur le salaire moyen de ton personnage en fonction de son métier?"
+    },
+    {
+        "num": 107,
+        "tag": "standard",
+        "Pprompt": "Ton personnage croise dans la rue un rival de longue date qu'il pensait mort depuis de nombreuses années. Comment réagit-il?"
+    },
+    {
+        "num": 108,
+        "tag": "standard",
+        "Pprompt": "Que pense ton personnage des tours de prestidigitation?"
+    }
+]

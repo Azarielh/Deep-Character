@@ -1,0 +1,542 @@
+[
+  {
+    "num": 1,
+    "tag": "standard",
+    "Pprompt": "Does your character know all their cousins?"
+  },
+  {
+    "num": 2,
+    "tag": "standard",
+    "Pprompt": "Is your character close to a particular cousin?"
+  },
+  {
+    "num": 3,
+    "tag": "standard",
+    "Pprompt": "You enter a room where your best friends are talking. You have no idea what they were talking about but when they saw you they stopped immediately. How would your character react in this situation? What would they think?"
+  },
+  {
+    "num": 4,
+    "tag": "standard",
+    "Pprompt": "Does your character cook? What is their most elaborate dish?"
+  },
+  {
+    "num": 5,
+    "tag": "standard",
+    "Pprompt": "Does your character have small \"quirks\" or rituals that might seem ridiculous or strange to others?"
+  },
+  {
+    "num": 6,
+    "tag": "standard",
+    "Pprompt": "What is your character's biggest regret?"
+  },
+  {
+    "num": 7,
+    "tag": "standard",
+    "Pprompt": "As children, we all had cute little secrets that we didn't always share. Think about what your character might have had."
+  },
+  {
+    "num": 8,
+    "tag": "standard",
+    "Pprompt": "Your character arrives late to an important job interview. Have you ever thought about what their attitude would be in this situation?"
+  },
+  {
+    "num": 9,
+    "tag": "standard",
+    "Pprompt": "Your character learns that someone has been secretly in love with them for years without them realizing it. How do they react if it's reciprocated? And if it's not?"
+  },
+  {
+    "num": 10,
+    "tag": "standard",
+    "Pprompt": "Your character has heard strange rumors about a national figure, each more disturbing than the last. How do they react when they meet them?"
+  },
+  {
+    "num": 11,
+    "tag": "standard",
+    "Pprompt": "A perfect stranger is being beaten up by another in an alley in front of your character. What is your reaction?"
+  },
+  {
+    "num": 12,
+    "tag": "standard",
+    "Pprompt": "What would your character do when facing a vampire in the middle of the night?"
+  },
+  {
+    "num": 13,
+    "tag": "standard",
+    "Pprompt": "Do you know who your character shouldn't trust?"
+  },
+  {
+    "num": 14,
+    "tag": "standard",
+    "Pprompt": "What if your character did something crazy?"
+  },
+  {
+    "num": 15,
+    "tag": "standard",
+    "Pprompt": "Sometimes, just staying quiet is good too... don't you think?"
+  },
+  {
+    "num": 16,
+    "tag": "standard",
+    "Pprompt": "Which character could easily defeat yours?"
+  },
+  {
+    "num": 17,
+    "tag": "standard",
+    "Pprompt": "In whose bed have you slept?"
+  },
+  {
+    "num": 18,
+    "tag": "standard",
+    "Pprompt": "What is their kryptonite?"
+  },
+  {
+    "num": 19,
+    "tag": "standard",
+    "Pprompt": "Are you sure this action is intelligent?"
+  },
+  {
+    "num": 20,
+    "tag": "standard",
+    "Pprompt": "What if your character was turned into an undead?"
+  },
+  {
+    "num": 21,
+    "tag": "standard",
+    "Pprompt": "A race to become master of the kingdom, are you interested?"
+  },
+  {
+    "num": 22,
+    "tag": "standard",
+    "Pprompt": "Is your character ashamed to admit they slept with one of their conquests?"
+  },
+  {
+    "num": 23,
+    "tag": "standard",
+    "Pprompt": "Would your character sell their soul to the devil?"
+  },
+  {
+    "num": 24,
+    "tag": "standard",
+    "Pprompt": "How would your character answer: \"Do you think it's healthy to worship something, or someone?\""
+  },
+  {
+    "num": 25,
+    "tag": "standard",
+    "Pprompt": "Your character is offered 3 wishes. It can be absolutely anything they want except bringing someone back to life and having more wishes"
+  },
+  {
+    "num": 26,
+    "tag": "standard",
+    "Pprompt": "Your character must choose between saving a child and eating their mother, or saving their mother and eating a child. What is their choice?"
+  },
+  {
+    "num": 27,
+    "tag": "standard",
+    "Pprompt": "Your character is being followed by a black cat, what do they do?"
+  },
+  {
+    "num": 28,
+    "tag": "standard",
+    "Pprompt": "The spoon does not exist."
+  },
+  {
+    "num": 29,
+    "tag": "standard",
+    "Pprompt": "If your character has a lot on their mind, how do they let it be known?"
+  },
+  {
+    "num": 30,
+    "tag": "standard",
+    "Pprompt": "Want to play something original? Focus on the least played species"
+  },
+  {
+    "num": 31,
+    "tag": "standard",
+    "Pprompt": "If you were a wizard, what would be your innate (personal) powers?"
+  },
+  {
+    "num": 32,
+    "tag": "standard",
+    "Pprompt": "What object would your character fall for?"
+  },
+  {
+    "num": 33,
+    "tag": "standard",
+    "Pprompt": "What type of person would your character fall for?"
+  },
+  {
+    "num": 34,
+    "tag": "standard",
+    "Pprompt": "Rather hero, anti-hero, ordinary or villain?"
+  },
+  {
+    "num": 35,
+    "tag": "standard",
+    "Pprompt": "If your character had to die, what do you see them reincarnating as?"
+  },
+  {
+    "num": 36,
+    "tag": "standard",
+    "Pprompt": "If you could do one thing to another character without them ever being able to retaliate, what would you do and to whom?"
+  },
+  {
+    "num": 37,
+    "tag": "standard",
+    "Pprompt": "Would you like to be the center of a subplot?"
+  },
+  {
+    "num": 38,
+    "tag": "standard",
+    "Pprompt": "Would you like to take part in a subplot or do you prefer to participate in a larger scale event?"
+  },
+  {
+    "num": 39,
+    "tag": "standard",
+    "Pprompt": "From which region of the world does your character come?"
+  },
+  {
+    "num": 40,
+    "tag": "standard",
+    "Pprompt": "Are their physical appearance and species consistent with their place of origin?"
+  },
+  {
+    "num": 41,
+    "tag": "standard",
+    "Pprompt": "Does your character's job relate to what they dreamed of as a child?"
+  },
+  {
+    "num": 42,
+    "tag": "standard",
+    "Pprompt": "What is your character's worst nightmare?"
+  },
+  {
+    "num": 43,
+    "tag": "standard",
+    "Pprompt": "What is the worst nightmare your character has had?"
+  },
+  {
+    "num": 44,
+    "tag": "standard",
+    "Pprompt": "Imagine a new NPC linked to your character. They can be discreet but important. Or very present but trivial. You decide."
+  },
+  {
+    "num": 45,
+    "tag": "standard",
+    "Pprompt": "Has your character ever had pets? If they had to buy one today, what would it be?"
+  },
+  {
+    "num": 46,
+    "tag": "standard",
+    "Pprompt": "Is there a dream dear to your character that they have nevertheless abandoned?"
+  },
+  {
+    "num": 47,
+    "tag": "standard",
+    "Pprompt": "Have you ever thought about playing your character in a subplot as an assistant or minor antagonist to another character?"
+  },
+  {
+    "num": 48,
+    "tag": "standard",
+    "Pprompt": "What is the first thing your character systematically does when they wake up in the morning?"
+  },
+  {
+    "num": 49,
+    "tag": "standard",
+    "Pprompt": "What is your character's greatest virtue?"
+  },
+  {
+    "num": 50,
+    "tag": "standard",
+    "Pprompt": "What is your character's worst vice?"
+  },
+  {
+    "num": 51,
+    "tag": "standard",
+    "Pprompt": "What MBTI type is your character?"
+  },
+  {
+    "num": 52,
+    "tag": "standard",
+    "Pprompt": "What goal does your character pursue?"
+  },
+  {
+    "num": 53,
+    "tag": "standard",
+    "Pprompt": "What would be your character's dream life?"
+  },
+  {
+    "num": 54,
+    "tag": "standard",
+    "Pprompt": "What would your character do if they were transformed into a small rodent?"
+  },
+  {
+    "num": 55,
+    "tag": "standard",
+    "Pprompt": "How could your character's childhood have been decisive?"
+  },
+  {
+    "num": 56,
+    "tag": "standard",
+    "Pprompt": "What is your character's favorite dish?"
+  },
+  {
+    "num": 57,
+    "tag": "standard",
+    "Pprompt": "What are your character's favorite colors and why?"
+  },
+  {
+    "num": 58,
+    "tag": "standard",
+    "Pprompt": "Does your character forgive easily?"
+  },
+  {
+    "num": 59,
+    "tag": "standard",
+    "Pprompt": "Is your character more introverted or extroverted?"
+  },
+  {
+    "num": 60,
+    "tag": "standard",
+    "Pprompt": "Is your character literate? (can they read and write?)"
+  },
+  {
+    "num": 61,
+    "tag": "standard",
+    "Pprompt": "What is the most spicy or embarrassing scene your character has secretly witnessed?"
+  },
+  {
+    "num": 62,
+    "tag": "standard",
+    "Pprompt": "Your character wakes up one morning in an unknown place and tied up in the corner of a dark room. What is their reaction?"
+  },
+  {
+    "num": 63,
+    "tag": "standard",
+    "Pprompt": "If you had to rank your character's 5 most pronounced vices..."
+  },
+  {
+    "num": 64,
+    "tag": "standard",
+    "Pprompt": "Do you have an embarrassing anecdote about their magic learning?"
+  },
+  {
+    "num": 65,
+    "tag": "standard",
+    "Pprompt": "What does your character do when they have free time?"
+  },
+  {
+    "num": 66,
+    "tag": "standard",
+    "Pprompt": "Your character learns that the young child of one of their neighbors is a wizard. Do they believe it? How do they react and act faced with this revelation?"
+  },
+  {
+    "num": 67,
+    "tag": "standard",
+    "Pprompt": "Your character believes they are a wizard? Is it possible? Unique? Could it be subject to hallucinations?"
+  },
+  {
+    "num": 68,
+    "tag": "standard",
+    "Pprompt": "Tell about a situation where your character could have saved someone's life or at least prevented them from being seriously injured but voluntarily or not, they didn't do it; why."
+  },
+  {
+    "num": 69,
+    "tag": "standard",
+    "Pprompt": "In one of your character's learning places, remember a thug who played boss one too many times and paid for it badly."
+  },
+  {
+    "num": 70,
+    "tag": "standard",
+    "Pprompt": "What does the region of the world your character comes from look like? Don't hesitate to ask your GM if you're missing information."
+  },
+  {
+    "num": 71,
+    "tag": "standard",
+    "Pprompt": "Has your character ever seen someone drown?"
+  },
+  {
+    "num": 72,
+    "tag": "standard",
+    "Pprompt": "Your character is peacefully drinking a glass in a tavern when suddenly, someone from the next table seems to have swallowed something the wrong way. Around, there are those who would like to do something but don't know what and are content to panic or call for help. There are those who are amused by the situation and others who look away casually. What does your character do?"
+  },
+  {
+    "num": 73,
+    "tag": "standard",
+    "Pprompt": "What could push your character to dive into the water of an ice-covered lake?"
+  },
+  {
+    "num": 74,
+    "tag": "standard",
+    "Pprompt": "Does your character have a piece of clothing or jewelry they don't like but keep for sentimental value?"
+  },
+  {
+    "num": 75,
+    "tag": "standard",
+    "Pprompt": "Your character falls into an ambush. Right away, it's obvious that they and the bunch of misfits accompanying them won't stand a chance against the enemy. Their companions surrender without question. Are they more likely to surrender themselves? Throw themselves into battle? Or follow their companions' lead?"
+  },
+  {
+    "num": 76,
+    "tag": "standard",
+    "Pprompt": "I am your father"
+  },
+  {
+    "num": 77,
+    "tag": "standard",
+    "Pprompt": "Your character is commissioned by the king to teach the prince. Do they accept?"
+  },
+  {
+    "num": 78,
+    "tag": "standard",
+    "Pprompt": "In the crowd a peasant drops a coin without realizing it. What does your character do? Do they hand it back? Keep it for themselves or let it lie?"
+  },
+  {
+    "num": 79,
+    "tag": "standard",
+    "Pprompt": "Define 1 ideal partner for your character. What do they look like? What are their hobbies? What ambitions? You have them? Now, among the PCs or NPCs encountered by your character. Which one corresponds most to their criteria? And if it's not the same one who makes their heart beat, why? and what differs them?"
+  },
+  {
+    "num": 80,
+    "tag": "standard",
+    "Pprompt": "Your character wakes up one morning tied up in what appears to be a cellar. Memories come back. They were ambushed with the rest of their group. Do they worry about the rest of their group? Why do they think they were left alive? Do they wait for their captors to arrive before trying to escape?"
+  },
+  {
+    "num": 81,
+    "tag": "standard",
+    "Pprompt": "Think about a new romantic relationship your character has had. How did they meet this person? How did this story begin? End? And especially what did your character learn from this relationship?"
+  },
+  {
+    "num": 82,
+    "tag": "standard",
+    "Pprompt": "Has your character ever been to the black market? If so, is it occasional or a habit? For what reason do they go there?"
+  },
+  {
+    "num": 83,
+    "tag": "standard",
+    "Pprompt": "Of all the places visited by your character, what is their favorite place? Where did they create their most beautiful memories?"
+  },
+  {
+    "num": 84,
+    "tag": "standard",
+    "Pprompt": "Alone in nature. Does your character have the know-how and knowledge to survive? How long does it take for your character before solitude weighs heavy on their heart?"
+  },
+  {
+    "num": 85,
+    "tag": "standard",
+    "Pprompt": "A street child has just managed to steal their purse. How does your character handle the situation?"
+  },
+  {
+    "num": 86,
+    "tag": "standard",
+    "Pprompt": "Does your character have an ounce of compassion towards beggars?"
+  },
+  {
+    "num": 87,
+    "tag": "standard",
+    "Pprompt": "Has your character ever had the opportunity to eat an insect-based dish?"
+  },
+  {
+    "num": 88,
+    "tag": "standard",
+    "Pprompt": "How close to death has your character been currently? What did they feel at that moment?"
+  },
+  {
+    "num": 89,
+    "tag": "standard",
+    "Pprompt": "If your character were an animal, what would they be?"
+  },
+  {
+    "num": 90,
+    "tag": "standard",
+    "Pprompt": "If your character were a music, what would they be?"
+  },
+  {
+    "num": 91,
+    "tag": "standard",
+    "Pprompt": "If your character were a food, what would they be?"
+  },
+  {
+    "num": 92,
+    "tag": "standard",
+    "Pprompt": "If your character were a movie genre, what would they be?"
+  },
+  {
+    "num": 93,
+    "tag": "standard",
+    "Pprompt": "If your character were a music genre, what would they be?"
+  },
+  {
+    "num": 94,
+    "tag": "standard",
+    "Pprompt": "If your character were an in-game item, what would they be?"
+  },
+  {
+    "num": 95,
+    "tag": "standard",
+    "Pprompt": "If your character were a real-life place, what would they be?"
+  },
+  {
+    "num": 96,
+    "tag": "standard",
+    "Pprompt": "If your character were a tree, what would they be?"
+  },
+  {
+    "num": 97,
+    "tag": "standard",
+    "Pprompt": "An extremist group attacks a child suspected of being a wizard by mistreating them relentlessly in the middle of the street. Your character witnesses the scene. What do they do?"
+  },
+  {
+    "num": 98,
+    "tag": "standard",
+    "Pprompt": "How does your character react to a provocative challenge that could endanger their life if they know they don't stand a chance against your opponent?"
+  },
+  {
+    "num": 99,
+    "tag": "standard",
+    "Pprompt": "Your character is approached by a secret group. Think of a few reasons that could explain it and what kind of secret groups might be interested in them."
+  },
+  {
+    "num": 100,
+    "tag": "standard",
+    "Pprompt": "Run! You fools!"
+  },
+  {
+    "num": 101,
+    "tag": "standard",
+    "Pprompt": "What if your character got pregnant? Or if it's a man, what would they do if their partner/wife got pregnant?"
+  },
+  {
+    "num": 102,
+    "tag": "standard",
+    "Pprompt": "Your character witnesses an extortion attempt. How do they act?"
+  },
+  {
+    "num": 103,
+    "tag": "standard",
+    "Pprompt": "What type of housing does your character live in?"
+  },
+  {
+    "num": 104,
+    "tag": "standard",
+    "Pprompt": "Describe your character's housing in a few words."
+  },
+  {
+    "num": 105,
+    "tag": "standard",
+    "Pprompt": "Your character has the possibility to save a child's life. But there's a strong chance that this heroic gesture will cost them their life. What do they do?"
+  },
+  {
+    "num": 106,
+    "tag": "standard",
+    "Pprompt": "Have you researched the average salary of your character according to their profession?"
+  },
+  {
+    "num": 107,
+    "tag": "standard",
+    "Pprompt": "Your character crosses paths with a long-standing rival they thought was dead for many years. How do they react?"
+  },
+  {
+    "num": 108,
+    "tag": "standard",
+    "Pprompt": "What does your character think of magic tricks?"
+  }
+]

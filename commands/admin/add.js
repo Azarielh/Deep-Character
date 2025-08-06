@@ -1,54 +1,62 @@
-const fs = require("node:fs");
 const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
 const wait = require("node:timers/promises").setTimeout;
 const prompt_service = require('../../srcs/services/prompt_service.js');
+const content = require('../../srcs/content/command_content.js');
+const data_service = require('../../srcs/services/data_service.js');
 
-const {
-  Client,
-  Collection,
-  Events,
-  GatewayIntentBits,
-  Message,
-} = require("discord.js"); // import discord library relative to the bot needs
-
-const client = new Client({
-  intents: [
-	GatewayIntentBits.Guilds,
-	GatewayIntentBits.GuildMessages,
-	GatewayIntentBits.MessageContent,
-  ],
-});
-
-//Créer la commande
 module.exports = {
   data: new SlashCommandBuilder()
 	.setName("add")
-	.setDescription("Add a new prompt")
+	.setDescription(content.command_content.fr.add.description)
+	.setDescriptionLocalizations({
+		'en-US': content.command_content.en.add.description,
+		'en-GB': content.command_content.en.add.description
+	})
 	.setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
-	//Ajouter une option requise
 	.addStringOption((option) =>
-	  option
-		.setName("prompt")
-		.setDescription("écris le prompt à ajouter")
-		.setRequired(true)
+		option
+			.setName("tag")
+			.setDescription(content.command_content.fr.add.options.tag)
+			.setDescriptionLocalizations({
+				'en-US': content.command_content.en.add.options.tag,
+				'en-GB': content.command_content.en.add.options.tag
+			})
+			.setRequired(true)
+	)
+	.addStringOption((option) =>
+		option
+			.setName("prompt")
+			.setDescription(content.command_content.fr.add.options.prompt)
+			.setDescriptionLocalizations({
+				'en-US': content.command_content.en.add.options.prompt,
+				'en-GB': content.command_content.en.add.options.prompt
+			})
+			.setRequired(true)
 	),
-  async execute(interaction) {
-	// Get input from user
-	const dpprompt = interaction.options.getString("prompt");
-	// Check if command used within a guild
-	const guild = interaction.guild; // Get guild from interaction
-	if (!guild) {
-	  await interaction.reply("This command can only be used within a server");
-	  return;
+	async execute(interaction) {
+		await add(interaction);
 	}
-	// Faire patienter l'user
-	await interaction.reply("Oui maître, j" + "'" + "enregistre votre demande");
-	//Ajouter le nouveau prompt au json
-	prompt_service.addit(dpprompt, guild);
-	await wait(1_000);
-	// Notify the user
-	await interaction.editReply(
-	  "**Super ! J'ai bien ajouté** " + '"__' + dpprompt + '__"'
-	);
-  },
 };
+
+async function add(interaction) {
+	const guild = interaction.guild;
+	const tag = interaction.options.getString("tag");
+	const dpprompt = interaction.options.getString("prompt");
+	const lang = data_service.get_lang(guild.id);
+	
+	if (!guild) {
+		await interaction.reply(content.command_content[lang].add.messages.guildOnly);
+		return;
+	}
+	
+	await interaction.reply(content.command_content[lang].add.messages.processing);
+	
+	try {
+		prompt_service.addit(tag, dpprompt, guild);
+		await wait(500);
+		await interaction.editReply(content.command_content[lang].add.messages.success(dpprompt));
+	} catch (error) {
+		console.error('Error in add command:', error);
+		await interaction.editReply(content.command_content[lang].add.messages.error);
+	}
+}

@@ -1,9 +1,9 @@
 const fs	=		require("node:fs"); // import node:fs library
 const path	=		require("node:path"); // import node:path witch improve path relating behaviour
-const cron	=		require("node-cron");
 const prompt_service	 =	require('./srcs/services/prompt_service.js');
 const data_service		 =	require('./srcs/services/data_service.js');
 const { login_manager }	 =	require('./srcs/managers/login_manager.js');
+const schedule_manager	 =	require('./srcs/managers/schedule_manager.js');
 const {
   Client,
   Collection,
@@ -32,11 +32,16 @@ for (const folder of commandFolders) {
   const commandFiles = fs
 	.readdirSync(commandsPath)
 	.filter((file) => file.endsWith(".js"));
+  
+  console.log(`📁 Chargement du dossier: ${folder}`);
+  console.log(`📄 Fichiers trouvés: ${commandFiles.join(', ')}`);
+  
   for (const file of commandFiles) {
 	const filePath = path.join(commandsPath, file);
 	const command = require(filePath);
 	if ("data" in command && "execute" in command) {
 	  client.commands.set(command.data.name, command);
+	  console.log(`✅ Commande chargée: ${command.data.name} depuis ${folder}/${file}`);
 	} else {
 	  console.log(
 		`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`
@@ -45,26 +50,9 @@ for (const folder of commandFolders) {
   }
 }
 
-// Send Scheduled inspire command
-//TODO: A déplacer dans un fichier indépendant
-cron.schedule(
-  "*/10 */5 * * *",
-  () => {
-	//FIXME: Channel ID "1072492463127793724" hardcodé pour le cron
-	const channel = client.channels.cache.get("1072492463127793724"); // This number is channel's ID. I'll have to make it changeable to deploy)
-	//FIXME: Cron job utilise interaction.guild alors que interaction n'existe pas dans ce contexte
-	if (channel) channel.send(prompt_service.randomPrompt(interaction.guild).Pprompt);
-	console.log("bazunga");
-  },
-  {
-	scheduled: true,
-	timezone: "Europe/Paris",
-  }
-);
-
 client.once(Events.ClientReady, (readyClient) => {
-
 	login_manager(client);
+	schedule_manager(client);
 	console.log(`Ready! Logged in as ${readyClient.user.tag}`);
 });
 

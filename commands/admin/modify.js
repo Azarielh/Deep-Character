@@ -1,58 +1,72 @@
-const fs = require("node:fs");
 const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
 const wait = require("node:timers/promises").setTimeout;
-const prompt_service = require('../../srcs/services/prompt_service.js')
+const prompt_service = require('../../srcs/services/prompt_service.js');
+const content = require('../../srcs/content/command_content.js');
+const data_service = require('../../srcs/services/data_service.js');
 
-//Créer la commande
 module.exports = {
-  data: new SlashCommandBuilder()
-	.setName("mod")
-	.setDescription("Modifier un prompt")
-	.setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
-	//Ajouter une option requise
-	.addStringOption((option) =>
-	  option
-		.setName("index")
-		.setDescription("numéro du prompt à modifier")
-		.setRequired(true)
-	)
-	.addStringOption((option) =>
-	  option
-		.setName("prompt")
-		.setDescription("écris le prompt à ajouter")
-		.setRequired(true)
-	),
+	data: new SlashCommandBuilder()
+		.setName("mod")
+		.setDescription(content.command_content.fr.modify.description)
+		.setDescriptionLocalizations({
+			'en-US': content.command_content.en.modify.description,
+			'en-GB': content.command_content.en.modify.description
+		})
+		.setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
+		.addStringOption((option) =>
+			option
+				.setName("index")
+				.setDescription(content.command_content.fr.modify.options.index)
+				.setDescriptionLocalizations({
+					'en-US': content.command_content.en.modify.options.index,
+					'en-GB': content.command_content.en.modify.options.index
+				})
+				.setRequired(true)
+		)
+		.addStringOption((option) =>
+			option
+				.setName("prompt")
+				.setDescription(content.command_content.fr.modify.options.new_prompt)
+				.setDescriptionLocalizations({
+					'en-US': content.command_content.en.modify.options.new_prompt,
+					'en-GB': content.command_content.en.modify.options.new_prompt
+				})
+				.setRequired(true)
+		),
 
-  async execute(interaction) {
-	// Get input from user
-	let Pnum = parseInt(interaction.options.getString("index"));
-	let dpprompt = interaction.options.getString("prompt");
-	const guild = interaction.guild;
-
-	console.log("Pnum : ", Pnum, "dpprompt : ", dpprompt);
-	// Faire patienter l'user
-	await interaction.reply("Oui maître, j" + "'" + "enregistre votre demande");
-	await wait(2000);
-	if (!Pnum || !dpprompt) {
-	  await interaction.editReply(
-		"Erreur : Les options fournies sont invalides"
-	  );
-	  return;
+	async execute(interaction) {
+		await modify(interaction);
 	}
-	//Ajouter le nouveau prompt au json
-	try {
-	  prompt_service.change_it(Pnum, dpprompt, guild);
-	} catch (error) {
-	  console.error(error);
-	  await interaction.editReply(
-		"Une erreur est survenue lors de la modification du prompt"
-	  );
-	  return;
-	}
-	await wait(1_000);
-	// Notify the user
-	await interaction.editReply(
-	  "**Super ! J'ai bien modifié** " + '"__' + dpprompt + '__"'
-	);
-  },
 };
+
+async function modify(interaction) {
+	const guild = interaction.guild;
+	const Pnum = parseInt(interaction.options.getString("index"));
+	const dpprompt = interaction.options.getString("prompt");
+	const lang = data_service.get_lang(guild.id);
+
+	if (!guild) {
+		await interaction.reply(content.command_content[lang].errors.guild_not_configured);
+		return;
+	}
+
+	if (!Pnum || !dpprompt) {
+		await interaction.reply(content.command_content[lang].modify.messages.invalid_input);
+		return;
+	}
+
+	await interaction.reply(content.command_content[lang].modify.messages.waiting);
+
+	try {
+		prompt_service.change_it(Pnum, dpprompt, guild);
+		await wait(500);
+		const successMessage = content.replacePlaceholders(
+			content.command_content[lang].modify.messages.success,
+			{ prompt: dpprompt }
+		);
+		await interaction.editReply(successMessage);
+	} catch (error) {
+		console.error('Error in modify command:', error);
+		await interaction.editReply(content.command_content[lang].modify.messages.error);
+	}
+}

@@ -46,6 +46,13 @@ function rebuild_guild_files(guildId, missing) {
 		load_data(guildId, missing[i++]);
 }
 
+function does_file_exist(guildId, file) {
+	const path = path.join(process.cwd(), `./guilds/${guildId}/_${file}_${guildId}.json`);
+	if (fs.existsSync(path))
+		return load_data(guildId, file);
+	return false;
+}
+
 /**
  * @brief This will check the existence of the three recquired file for a guild within it's dedicated folder. This fonction needs to be called only after making sure the guild folder exist in the right place.
  * @param guildId 
@@ -88,8 +95,13 @@ function load_data(guildId, file_name) {
 	}
 }
 
+function get_lang(guildId) {
+	const src = load_data(guildId, 'config');
+	return (src.lang);
+}
+
 function prompts_init(guildId) {
-	//TODO: Ajouter try-catch pour gérer les erreurs de copie de fichier
+	//TODO: Add try-catch for error management
 	const config_path = path.join(process.cwd(), `./guilds/${guildId}/_config_${guildId}.json`);
 	const config = JSON.parse(fs.readFileSync(config_path));
 	const lang = config.lang;
@@ -97,15 +109,15 @@ function prompts_init(guildId) {
 	const guild_prompts = path.join(process.cwd(), `./guilds/${guildId}/_prompts_${guildId}.json`);
 console.log(guild_prompts);
 // Copy prompts_fr.json into guildId folder
-	if (fs.existsSync(standard_prompts)) {
-		try {
+	try {
+		if (fs.existsSync(standard_prompts)) {
 			fs.copyFileSync(standard_prompts, guild_prompts);
 			console.log(`Prompt's file has been duplicate to : prompts_${guildId}.json`);
-		} catch (error) {
+		} else
+			console.error(`I couldn't find the initial prompt's file`);
+	} catch (error) {
 			console.error('Error : There was an issue while attempting to copy prompt.json');
 		}
-	} else
-		console.error(`I couldn't find the initial prompt's file`);
 	return null;
 }
 
@@ -121,6 +133,8 @@ module.exports = {
 	build_guild_folder,
 	rebuild_guild_files,
 	file_set_exist,
+	does_file_exist,
+	get_lang,
 	load_data,
 	save_Data
 }
