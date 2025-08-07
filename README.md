@@ -1,10 +1,10 @@
 # Deep-Character
 
-## Présentation
+## 📝 Présentation 
 
 Deep-Character est un bot Discord conçu pour aider les joueurs de jeux de rôle à approfondir leur personnage grâce à des prompts personnalisés, envoyés sur demande ou de façon planifiée à des créneaux et fréquences précises. L'objectif initial était de fournir un outil simple et efficace pour enrichir l'expérience RP, mais le projet a rapidement évolué vers une ambition de mégabot JDR, intégrant de nombreuses fonctionnalités pour dynamiser vos univers et communautés.
 
-## Fonctionnalités opérationnelles
+## 🚀 Fonctionnalités opérationnelles 
 
 - 🧠 **Prompts de développement** : Recevez des idées pour enrichir votre personnage, soit sur commande, soit automatiquement selon un planning défini.
 - 🗂️ **Gestion des prompts** : Ajoutez, modifiez, listez et bientôt supprimez vos prompts. Chaque prompt peut avoir plusieurs tags, et le cercle de couleur change selon le tag.
@@ -13,7 +13,7 @@ Deep-Character est un bot Discord conçu pour aider les joueurs de jeux de rôle
 - 🌐 Système multilingue (FR/EN)
 - 🛡️ Gestion des permissions (admin/user)
 
-## Fonctionnalités en développement ou à venir
+## 🛠️ Fonctionnalités en développement ou à venir 
 
 - 🗑️ **Suppression de prompt** : (C'est la prochaine fonction implémentée) Aussi fou que ce soit, je ne l'ai pas encore implémentée, mais c'est pour très bientôt.
 - 🏷️ **Tri et filtrage** : (En dévellopement 🛠️) Affichez les prompts par tag ou filtrez pour n'afficher qu'un type de tag.
@@ -36,16 +36,16 @@ Deep-Character est un bot Discord conçu pour aider les joueurs de jeux de rôle
 - 📋 **Historique des votes et résultats**
 - 👤 **Consultation de fiche PNJ** (version membres et admin pour garder des infos secrètes)
 
-## Ambitions et philosophie
+## 🌟 Ambitions et philosophie 
 
 Deep-Character n'a pas vocation à remplacer les MJ ou à automatiser la gestion du jeu via l'IA. Il s'agit d'un outil pour faciliter la vie des MJ, rassembler les infos joueurs, et divertir la communauté avec des quiz et des outils personnalisés. Deep-Character ne connait pas votre univers, par conséquent les prompts et questions de quiz serontt ajoutées par vous. Deep-Character restera gratuit et sans options payantes.
 
 
-## Contribution et personnalisation
+## 🛠️ Contribution et personnalisation 
 
 Le bot est pensé pour s'adapter à vos univers et formats. Les templates de fiche personnage devront comporter des placeholders définis dans le guide du bot. L'arbre de compétences et le système de progression seront personnalisables, mais nécessiteront un peu de bonne volonté de votre part pour l'intégration.
 
-## Remarque importante
+## ⚠️ Remarque importante
 
 Deep-Character est un outil d'accompagnement pour MJ et joueurs, pas un remplaçant. Il vise à enrichir l'expérience, faciliter la gestion et renforcer la communauté, tout en restant gratuit et ouvert à la personnalisation.
 
