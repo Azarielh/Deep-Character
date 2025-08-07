@@ -15,8 +15,8 @@ const buttons_content = {
 			edit: 'Modifier',
 			add: 'Ajouter',
 			back: 'Retour',
-			next: 'Suivant',
-			previous: 'Précédent',
+			next: 'Suivant  ▶️',
+			previous: '◀️  Précédent',
 			finish: 'Terminer'
 		},
 		

@@ -4,7 +4,7 @@ const data_service = require('../../srcs/services/data_service.js');
 
 async function rollDice(interaction) {
 	try {
-		const lang = await data_service.get_lang(interaction.guild.id);
+		const lang = await data_service.get_lang(interaction.guild.id) || en;
 		
 		const facesroll = interaction.options.getNumber('faces');
 		const how_many_roll = interaction.options.getNumber('how_many') || 1;
@@ -16,13 +16,9 @@ async function rollDice(interaction) {
 		}
 
 		// Create message with placeholders
-		const message = content.command_content[lang].roll.simple_format;
-		const formattedMessage = content.replacePlaceholders(message, {
-			faces: facesroll,
-			results: result.join(', ')
-		});
+		const msg = content.msg_roll(lang, how_many_roll, facesroll, result);
 
-		await interaction.reply(formattedMessage);
+		await interaction.reply(msg);
 	} catch (error) {
 		console.error('Error while rolling dice:', error);
 		

@@ -1,15 +1,15 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
-const content = require('../../srcs/content/command_content.js');
+const { command_content } = require('../../srcs/content/command_content.js');
 const data_service = require('../../srcs/services/data_service.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('help')
-		.setDescription(content.command_content.fr.help.description)
-		.setDescriptionLocalizations({
-			'en-US': content.command_content.en.help.description,
-			'en-GB': content.command_content.en.help.description
-		}),
+	.setDescription(command_content.fr.help.description)
+	.setDescriptionLocalizations({
+		'en-US': command_content.en.help.description,
+		'en-GB': command_content.en.help.description
+	}),
 
 	async execute(interaction) {
 		await helpCommand(interaction);
@@ -28,7 +28,7 @@ async function helpCommand(interaction) {
 }
 
 async function sendUserHelp(interaction, lang) {
-	const helpMsg = content.command_content[lang].help.user;
+const helpMsg = command_content[lang].help.user;
 	await interaction.reply({
 		content: helpMsg,
 		ephemeral: true
@@ -36,7 +36,7 @@ async function sendUserHelp(interaction, lang) {
 }
 
 async function sendAdminHelp(interaction, lang) {
-	const helpMsg = content.command_content[lang].help.admin;
+const helpMsg = command_content[lang].help.admin;
 	await interaction.reply({
 		content: helpMsg,
 		ephemeral: true

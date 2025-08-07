@@ -28,7 +28,7 @@ const command_content = {
 			messages: {
 				guildOnly: 'Cette commande ne peut être utilisée que dans un serveur.',
 				processing: 'Oui maître, j\'enregistre votre demande',
-				success: (prompt) => `**Super ! J'ai bien ajouté** "${prompt}"`,
+				success: `**Super ! J'ai bien ajouté** {prompt}`,
 				error: 'Erreur lors de l\'ajout du prompt.',
 				invalid_input: 'Erreur : Les options fournies sont invalides'
 			}
@@ -93,25 +93,18 @@ const command_content = {
 				faces: 'Nombre de faces par dé'
 			},
 			messages: {
-				result: '🎲 Résultat du lancer : **{result}**',
-				details: 'Dés lancés : {dice}d{faces}',
-				individual_results: 'Résultats individuels : {results}',
+				classic: '🎲**{dices_num} D{faces}** : {results}',
 				total: 'Total : **{total}**',
 				invalid_dice: '❌ Nombre de dés invalide (1-20).',
 				invalid_faces: '❌ Nombre de faces invalide (2-1000).',
-				simple_format: '**D{faces}** : {results}'
 			}
 		},
-		
-		// /setup command
 		setup: {
 			description: 'Configure le bot pour ce serveur',
 			already_exists: '⚠️ Un channel de setup existe déjà : {channel}. Utilisez la commande `/close` pour le fermer avant d\'en créer un nouveau.',
 			creating: '� Création du channel de configuration en cours...',
 			success: '✅ Channel de setup créé avec succès : {channel}'
 		},
-		
-		// /close command (admin)
 		close: {
 			description: 'Ferme le channel actuel après confirmation',
 			confirm: '⚠️ **Attention !** Voulez-vous vraiment fermer le channel **{channel}** ?\n\n*Cette action est irréversible et supprimera définitivement ce channel.*',
@@ -123,8 +116,6 @@ const command_content = {
 				cancel: '❌ Annuler'
 			}
 		},
-		
-		// Generic error messages
 		errors: {
 			permission_denied: '🚫 Vous n\'avez pas les permissions nécessaires pour cette action.',
 			command_failed: '💥 La commande a échoué. Veuillez réessayer.',
@@ -135,14 +126,11 @@ const command_content = {
 			rate_limited: '⏰ Vous utilisez cette commande trop fréquemment. Veuillez patienter.',
 			guild_not_configured: '⚙️ Ce serveur n\'est pas configuré. Utilisez `/setup` d\'abord.'
 		},
-		
-		// System and automatic messages
 		system: {
 			response_received: 'Si seulement tu réalisais les implications de cette réponse :smirk:',
 			prompt_format: '{num} : {prompt}',  // For inspire command and auto prompts
 			error_general: 'There was an error while executing this command!'
 		},
-		// /help command
 		help: {
 			description: 'Affiche une aide pour les membres standards',
 			user:	'**Commandes utilisateur :**\n' +
@@ -163,8 +151,8 @@ const command_content = {
 						'• `/vote` : Lance un vote avec options personnalisées\n' +
 						'• `/help` : Affiche ce message d\'aide'
 		},
-	},	en: {
-		// /inspire command
+	},
+	en: {
 		inspire: {
 			description: 'Sends a character development prompt',
 			options: {
@@ -176,8 +164,6 @@ const command_content = {
 				error_loading: 'Error loading prompts.'
 			}
 		},
-		
-		// /add command
 		add: {
 			description: 'Adds a new prompt to the system',
 			options: {
@@ -192,8 +178,6 @@ const command_content = {
 				invalid_input: 'Error: Invalid options provided'
 			}
 		},
-		
-		// /modify command
 		modify: {
 			description: 'Modifies an existing prompt',
 			options: {
@@ -203,7 +187,10 @@ const command_content = {
 			messages: {
 				waiting: 'Yes master, I\'m recording your request',
 				success: '**Great! I successfully modified** "{prompt}"',
-		// /help command
+				error: 'Error modifying prompt.',
+				invalid_input: 'Error: Invalid options provided'
+			},
+		},
 		help: {
 			description: 'Displays help for standard members',
 			user:	'**User commands:**\n' +
@@ -223,13 +210,7 @@ const command_content = {
 						'• `/roll`: Rolls dice\n' +
 						'• `/vote`: Starts a vote with custom options\n' +
 						'• `/help`: Displays help for standard members'
-		},
-				error: 'Error modifying prompt.',
-				invalid_input: 'Error: Invalid options provided'
-			}
-		},
-		
-		// /list command
+			},
 		list: {
 			description: 'Displays paginated list of available prompts',
 			options: {
@@ -244,8 +225,6 @@ const command_content = {
 				navigation_hint: 'Use buttons to navigate between pages.'
 			}
 		},
-		
-		// /vote command
 		vote: {
 			description: 'Starts a vote with custom options',
 			options: {
@@ -264,17 +243,14 @@ const command_content = {
 				closed: 'This vote is closed.'
 			}
 		},
-		
-		// /roll command
 		roll: {
-			description: '🎲 Rolls dice',
+			description: '🎲 Rolls some dices',
 			options: {
 				dice: 'Number of dice to roll',
 				faces: 'Number of faces per die'
 			},
 			messages: {
-				result: '🎲 {dice}d{faces} : **{result}',
-				individual_results: 'D{faces}: {results}',
+				classic: '🎲**{dices_num} D{faces}** : {results}',
 				total: 'Total: **{total}**',
 				invalid_dice: '❌ Invalid number of dice (1-20).',
 				invalid_faces: '❌ Invalid number of faces (2-1000).',
@@ -332,12 +308,19 @@ const command_content = {
 function getCommandContent(language, command) {
 	return command_content[language]?.[command] || command_content['fr'][command];
 }
+			// messages: {
+			// 	classic: '🎲**{dices_num} D{faces}** : {results}'
+ function msg_roll(lang, dices_num, faces, result) {
+	let msg = get_cmd_msg(lang, 'roll', 'classic');
+	console.log('msg_roll is here');
+	console.log(msg,`\nlang = ${lang}\ndices_num = ${dices_num}\nfaces = ${faces}\nresult = ${result}\n`);
+	msg = msg.replace('{dices_num}', dices_num);
+	console.log('I replaced dices_num');
+	msg = msg.replace('{faces}', faces);
+	console.log('I replaced faces');
+	msg = msg.replace('{results}', result);
+	console.log('I replaced result');
 
-function msg_roll(lang, dices_num, faces, result) {
-	const msg = get_cmd_msg(lang, 'roll', command_content[lang][command].messages['result']);
-	msg = msg.replace(`${dices_num}`);
-	msg = msg.replace(`${faces}`);
-	msg = msg.replace(`${result}`);
 	return msg;
 }
 
