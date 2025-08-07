@@ -6,6 +6,7 @@ const path	= require('node:path');
 const {
 	ChannelType,
 	PermissionFlagsBits,
+	MessageFlags,
 	ButtonBuilder,
 	ButtonStyle,
 	ActionRowBuilder,
@@ -300,7 +301,7 @@ async function config_manager(guild, client) {
 			
 			await interaction.reply({
 				embeds: [completionEmbed, featuresEmbed],
-				ephemeral: false
+				flags: MessageFlags.Ephemeral
 			});
 			
 			// Envoyer le message de clôture après les embeds de fonctionnalités
@@ -308,7 +309,7 @@ async function config_manager(guild, client) {
 		} else if (interaction.customId === 'close_setup_channel') {
 			await interaction.reply({
 				content: '👋 Merci d\'avoir utilisé Deep-Character ! Le channel sera supprimé dans 5 secondes...',
-				ephemeral: true
+				flags: MessageFlags.Ephemeral
 			});
 			collector.stop('Setup is done');
 		}

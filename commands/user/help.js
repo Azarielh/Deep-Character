@@ -1,5 +1,5 @@
-const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
-const content = require('../../srcs/content/command_content.js');
+const { SlashCommandBuilder, PermissionFlagsBits, MessageFlags } = require('discord.js');
+const content = require('../../srcs/contents/command_content.js');
 const data_service = require('../../srcs/services/data_service.js');
 
 module.exports = {
@@ -31,7 +31,7 @@ async function sendUserHelp(interaction, lang) {
 	const helpMsg = content.command_content[lang].help.user;
 	await interaction.reply({
 		content: helpMsg,
-		ephemeral: true
+		flags: MessageFlags.Ephemeral
 	});
 }
 
@@ -39,6 +39,6 @@ async function sendAdminHelp(interaction, lang) {
 	const helpMsg = content.command_content[lang].help.admin;
 	await interaction.reply({
 		content: helpMsg,
-		ephemeral: true
+		flags: MessageFlags.Ephemeral
 	});
 }

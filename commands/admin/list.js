@@ -1,6 +1,6 @@
 const fs = require('node:fs');
 const path = require('node:path');
-const { SlashCommandBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
+const { SlashCommandBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, MessageFlags} = require('discord.js');
 const { ActionRowBuilder } = require('@discordjs/builders');
 const msg = require('../../srcs/contents/command_content.js');
 const btn = require('../../srcs/contents/button_content.js');
@@ -181,9 +181,9 @@ async function list(interaction, startIndex = 0) {
 		if (!msg.command_content[langErr]) langErr = 'fr';
 			const errorMessage = msg.command_content[langErr].errors.general;
 		if (!interaction.replied) {
-			await interaction.reply({ content: errorMessage, flags: 64 });
+			await interaction.reply({ content: errorMessage, flags: MessageFlags.Ephemeral });
 		} else {
-			await interaction.followUp({ content: errorMessage, flags: 64 });
+			await interaction.followUp({ content: errorMessage, flags: MessageFlags.Ephemeral });
 		}
 	}
 }

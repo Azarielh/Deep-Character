@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, MessageFlags} = require('discord.js');
 const content = require('../../srcs/contents/command_content.js');
 const data_service = require('../../srcs/services/data_service.js');
 
@@ -16,23 +16,19 @@ async function rollDice(interaction) {
 		}
 
 		// Create message with placeholders
-		const message = content.command_content[lang].roll.simple_format;
-		const formattedMessage = content.replacePlaceholders(message, {
-			faces: facesroll,
-			results: result.join(', ')
-		});
+		const msg = content.msg_roll(lang, how_many_roll, facesroll, result);
 
-		await interaction.reply(formattedMessage);
+		await interaction.reply(msg);
 	} catch (error) {
 		console.error('Error while rolling dice:', error);
 		
-		const lang = await data_service.get_lang(interaction.guild.id).catch(() => 'fr');
+		const lang = await data_service.get_lang(interaction.guild.id);
 		const errorMessage = content.command_content[lang].errors.general || 'Une erreur est survenue.';
 		
 		if (interaction.deferred) {
 			await interaction.editReply(errorMessage);
 		} else {
-			await interaction.reply({ content: errorMessage, ephemeral: true });
+			await interaction.reply({ content: errorMessage, flags: MessageFlags.Ephemeral });
 		}
 	}
 }

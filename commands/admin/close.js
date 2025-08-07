@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, PermissionFlagsBits, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+const { SlashCommandBuilder, PermissionFlagsBits, ActionRowBuilder, ButtonBuilder, ButtonStyle, MessageFlags } = require('discord.js');
 const content = require('../../srcs/contents/command_content.js');
 const data_service = require('../../srcs/services/data_service.js');
 
@@ -116,12 +116,12 @@ async function closeChannel(interaction) {
 		if (interaction.replied || interaction.deferred) {
 			await interaction.editReply({
 				content: errorMessage,
-				ephemeral: true
+				flags: MessageFlags.Ephemeral
 			});
 		} else {
 			await interaction.reply({
 				content: errorMessage,
-				ephemeral: true
+				flags: MessageFlags.Ephemeral
 			});
 		}
 	}

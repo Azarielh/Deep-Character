@@ -93,13 +93,10 @@ const command_content = {
 				faces: 'Nombre de faces par dé'
 			},
 			messages: {
-				result: '🎲 Résultat du lancer : **{result}**',
-				details: 'Dés lancés : {dice}d{faces}',
-				individual_results: 'Résultats individuels : {results}',
-				total: 'Total : **{total}**',
+				result: '🎲 **{dices_num}d{faces} : **{result}',
+				total: '🎲Total : **{total}**',
 				invalid_dice: '❌ Nombre de dés invalide (1-20).',
 				invalid_faces: '❌ Nombre de faces invalide (2-1000).',
-				simple_format: '**D{faces}** : {results}'
 			}
 		},
 		
@@ -187,7 +184,7 @@ const command_content = {
 			messages: {
 				guildOnly: 'This command can only be used within a server.',
 				processing: 'Yes master, I\'m recording your request',
-				success: (prompt) => `**Great! I successfully added** "${prompt}"`,
+				success: `**Great! I successfully added** {prompt}`,
 				error: 'Error adding prompt.',
 				invalid_input: 'Error: Invalid options provided'
 			}
@@ -203,6 +200,10 @@ const command_content = {
 			messages: {
 				waiting: 'Yes master, I\'m recording your request',
 				success: '**Great! I successfully modified** "{prompt}"',
+				error: 'Error modifying prompt.',
+				invalid_input: 'Error: Invalid options provided'
+			}
+		},
 		// /help command
 		help: {
 			description: 'Displays help for standard members',
@@ -224,11 +225,7 @@ const command_content = {
 						'• `/vote`: Starts a vote with custom options\n' +
 						'• `/help`: Displays help for standard members'
 		},
-				error: 'Error modifying prompt.',
-				invalid_input: 'Error: Invalid options provided'
-			}
-		},
-		
+
 		// /list command
 		list: {
 			description: 'Displays paginated list of available prompts',
@@ -273,9 +270,8 @@ const command_content = {
 				faces: 'Number of faces per die'
 			},
 			messages: {
-				result: '🎲 {dice}d{faces} : **{result}',
-				individual_results: 'D{faces}: {results}',
-				total: 'Total: **{total}**',
+				result: '🎲 **{dices_num}d{faces} : **{result}',
+				total: '🎲 Total: **{total}**',
 				invalid_dice: '❌ Invalid number of dice (1-20).',
 				invalid_faces: '❌ Invalid number of faces (2-1000).',
 			}
@@ -334,10 +330,10 @@ function getCommandContent(language, command) {
 }
 
 function msg_roll(lang, dices_num, faces, result) {
-	const msg = get_cmd_msg(lang, 'roll', command_content[lang][command].messages['result']);
-	msg = msg.replace(`${dices_num}`);
-	msg = msg.replace(`${faces}`);
-	msg = msg.replace(`${result}`);
+	let msg = get_cmd_msg(lang, 'roll', 'result');
+	msg = msg.replace('{dices_num}', dices_num);
+	msg = msg.replace('{faces}', faces);
+	msg = msg.replace('{result}', result);
 	return msg;
 }
 
