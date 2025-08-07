@@ -2,8 +2,8 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { SlashCommandBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
 const { ActionRowBuilder } = require('@discordjs/builders');
-const msg = require('../../srcs/content/command_content.js');
-const btn = require('../../srcs/content/buttons_content.js');
+const msg = require('../../srcs/contents/command_content.js');
+const btn = require('../../srcs/contents/button_content.js');
 const data_service = require('../../srcs/services/data_service.js');
 
 // Command definition

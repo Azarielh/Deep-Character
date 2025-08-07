@@ -1,6 +1,5 @@
 const fs	=		require("node:fs"); // import node:fs library
 const path	=		require("node:path"); // import node:path witch improve path relating behaviour
-const prompt_service	 =	require('./srcs/services/prompt_service.js');
 const data_service		 =	require('./srcs/services/data_service.js');
 const { login_manager }	 =	require('./srcs/managers/login_manager.js');
 const schedule_manager	 =	require('./srcs/managers/schedule_manager.js');
