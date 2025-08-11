@@ -33,7 +33,19 @@ const command_content = {
 				invalid_input: 'Erreur : Les options fournies sont invalides'
 			}
 		},
-		
+		// /del command
+		del: {
+		  description: "Supprime un prompt précis",
+		  options: {
+		    index: "Index du prompt à supprimer"
+		  },
+		  messages: {
+		    confirm: "Êtes-vous sûr de vouloir supprimer le prompt n°{index} ? Cette action est irréversible.",
+		    success: "✅ Le prompt n°{index} a bien été supprimé.",
+		    not_found: "❌ Aucun prompt trouvé à cet index.",
+		    error: "❌ Une erreur est survenue lors de la suppression du prompt."
+		  }
+		},
 		// /modify command
 		modify: {
 			description: 'Modifie un prompt existant',
@@ -189,7 +201,19 @@ const command_content = {
 				invalid_input: 'Error: Invalid options provided'
 			}
 		},
-		
+		// /del command
+		del: {
+		  description: "Deletes a specific prompt",
+		  options: {
+		    index: "Index of the prompt to delete"
+		  },
+		  messages: {
+		    confirm: "Are you sure you want to delete prompt #{index}? This action is irreversible.",
+		    success: "✅ Prompt #{index} has been deleted.",
+		    not_found: "❌ No prompt found at this index.",
+		    error: "❌ An error occurred while deleting the prompt."
+		  }
+		},
 		// /modify command
 		modify: {
 			description: 'Modifies an existing prompt',

@@ -100,22 +100,21 @@ async function list(interaction, startIndex = 0) {
 			filter,
 			time: 300000 // 5 minutes
 		});
-
 		collector.on('collect', async i => {
 			try {
 				// Reload prompts for updated data
 				const filepath = path.join(process.cwd(), `./guilds/${interaction.guild.id}/_prompts_${interaction.guild.id}.json`);
 				const jsonprompt = JSON.parse(fs.readFileSync(filepath, 'utf-8'));
 				const totalPrompts = jsonprompt.length;
-		let lang = 'fr';
+		let lang = 'en';
 		try {
 			lang = await data_service.get_lang(interaction.guild.id);
 		} catch (e) {
-			console.warn('Langue non trouvée, fallback fr');
+			console.warn('Langue non trouvée, fallback en');
 		}
 		if (!msg.command_content[lang]) {
-			console.warn('Langue non supportée, fallback fr');
-			lang = 'fr';
+			console.warn('Langue non supportée, fallback en');
+			lang = 'en';
 		}
 
 				if (i.customId === 'precedent') {
@@ -164,10 +163,20 @@ async function list(interaction, startIndex = 0) {
 		});
 
 		collector.on('end', async collected => {
-				interaction.editReply({
-					content: msg.command_content[currentLang].list.timeout,
-					components: []
-				})
+			let lang = 'en';
+			try {
+				lang = await data_service.get_lang(interaction.guild.id);
+			} catch (e) {
+				console.warn('Langue non trouvée, fallback en');
+			}
+			if (!msg.command_content[lang]) {
+				console.warn('Langue non supportée, fallback en');
+				lang = 'en';
+			}
+			interaction.editReply({
+				content: msg.command_content[lang].list.timeout,
+				components: []
+			})
 		});
 	} catch (error) {
 		console.error('Error during pagination:', error);
