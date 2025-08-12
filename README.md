@@ -31,6 +31,7 @@ Deep-Character est un bot Discord conçu pour aider les joueurs de jeux de rôle
 - 📖 **Historique des sessions et journal de campagne** (partagé entre MJ et joueurs, lié au forum si présent)
 - 📆🎉 **Planification d'événements, anniversaires de personnages/joueurs**
 - ⏰ **Rappels automatiques des événements RP**
+- 📆 **Planning absence pour facilité et optimisé les dates de lancements de grande quête//évènements.**
 - 📨 **Rappel de RP pour les joueurs en retard** (activable/désactivable)
 - 🗳️ **Outils de vote collectif** (avec ou sans compte à rebours)
 - 📋 **Historique des votes et résultats**
@@ -38,7 +39,7 @@ Deep-Character est un bot Discord conçu pour aider les joueurs de jeux de rôle
 
 ## 🌟 Ambitions et philosophie 
 
-Deep-Character n'a pas vocation à remplacer les MJ ou à automatiser la gestion du jeu via l'IA. Il s'agit d'un outil pour faciliter la vie des MJ, rassembler les infos joueurs, et divertir la communauté avec des quiz et des outils personnalisés. Deep-Character ne connait pas votre univers, par conséquent les prompts et questions de quiz serontt ajoutées par vous. Deep-Character restera gratuit et sans options payantes.
+Deep-Character n'a pas vocation à remplacer les MJ ou à automatiser la gestion du jeu via l'IA. Il s'agit d'un outil pour faciliter la vie des MJ, rassembler les infos personnages, ce à quoi aspire pour eux ceux qui les jouent, et divertir la communauté avec des quiz et des outils personnalisés. Deep-Character ne connait pas votre univers, par conséquent les prompts et questions de quiz serontt ajoutées par vous. Deep-Character restera gratuit et sans options payantes.
 
 
 ## 🛠️ Contribution et personnalisation 

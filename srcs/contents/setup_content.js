@@ -58,6 +58,11 @@ const setup_content = {
             footer: 'Deep-Character • Configuration - Étape 2/3'
         },
         
+        // Message d'information sur l'envoi planifié de prompts
+        scheduled_prompt_info: {
+            name: '⏰ Envoi planifié de prompts',
+            value: `Vous pouvez activer l'envoi automatique de prompts dans le salon choisi.\nCette fonctionnalité permet à Deep-Character de poster régulièrement des prompts de développement pour vos personnages, sans intervention manuelle.\n\n💡 Cette option est particulièrement pertinente si de nombreux prompts ont été ajoutés par le staff du serveur, afin de proposer des idées variées et adaptées à votre univers.\nPlus vous ajoutez de prompts spécifiques à votre communauté, plus les suggestions automatiques seront riches et immersives pour vos joueurs !`
+        },
         // Channel selection messages
         channel_selection: {
             prompt: 'Il faut choisir un salon où je pourrais poster les prompts pour vos joueurs.',
@@ -119,7 +124,6 @@ const setup_content = {
             collector_ended: 'Collector terminé'
         }
     },
-    
     en: {
         // Main welcome embed
         welcome_embed: {
@@ -168,7 +172,11 @@ const setup_content = {
             },
             footer: 'Deep-Character • Configuration - Step 2/3'
         },
-        
+        // Scheduled prompt info message
+        scheduled_prompt_info: {
+            name: '⏰ Scheduled prompt sending',
+            value: `You can enable automatic prompt sending in the selected channel.\nThis feature allows Deep-Character to regularly post character development prompt for your players, without manual intervention.\n\n💡 This option is especially relevant if many prompts have been added by your server staff, to provide varied and universe-specific ideas.\nThe more custom prompts you add for your community, the richer and more immersive the automatic suggestions will be!`
+        },
         // Channel selection messages
         channel_selection: {
             prompt: 'Choose a channel',

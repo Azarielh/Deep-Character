@@ -47,10 +47,10 @@ function rebuild_guild_files(guildId, missing) {
 }
 
 function does_file_exist(guildId, file) {
-	const path = path.join(process.cwd(), `./guilds/${guildId}/_${file}_${guildId}.json`);
-	if (fs.existsSync(path))
-		return load_data(guildId, file);
-	return false;
+    const filePath = path.join(process.cwd(), `./guilds/${guildId}/_${file}_${guildId}.json`);
+    if (fs.existsSync(filePath))
+        return load_data(guildId, file);
+    return false;
 }
 
 /**

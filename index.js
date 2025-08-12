@@ -49,8 +49,8 @@ for (const folder of commandFolders) {
   }
 }
 
-client.once(Events.ClientReady, (readyClient) => {
-	login_manager(client);
+client.once(Events.ClientReady,  async (readyClient) => {
+	await login_manager(client);
 	schedule_manager(client);
 	console.log(`Ready! Logged in as ${readyClient.user.tag}`);
 });

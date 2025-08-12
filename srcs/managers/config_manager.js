@@ -150,7 +150,13 @@ async function config_manager(guild, client) {
 
 			await interaction.update({ embeds: [frEmbed], components: [languageButtons]});
 			ds.build_guild_folder(guild.id);
-			await ds.save_Data('config', guild.id, { name: guild.name, id: guild.id, lang: 'fr' });
+			await ds.save_Data('config', guild.id, {
+				name: guild.name,
+				id: guild.id,
+				lang: 'fr',
+				switch_cron_inspire: 'off',
+				promptChannel: null
+			});
 			ds.load_data(guild.id, 'data_character');
 			ds.load_data(guild.id, 'prompts');
 						
@@ -180,8 +186,54 @@ async function config_manager(guild, client) {
 					iconURL: client.user.displayAvatarURL()
 				})
 				.setTimestamp();
-			
+
 			await channel.send({ embeds: [frLanguageEmbed] });
+
+			// Ajout du message d'activation de l'envoi planifié de prompts avec boutons ON/OFF
+			const setup_content = require('../contents/setup_content.js');
+			const scheduledPromptInfo = setup_content.fr.scheduled_prompt_info;
+			const scheduledPromptEmbed = new EmbedBuilder()
+				.setColor(0x3498db)
+				.setTitle(scheduledPromptInfo.name)
+				.setDescription(scheduledPromptInfo.value);
+			const onOffRow = new ActionRowBuilder().addComponents(
+				new ButtonBuilder()
+					.setCustomId('cron_on')
+					.setLabel('Activer')
+					.setStyle(ButtonStyle.Success),
+				new ButtonBuilder()
+					.setCustomId('cron_off')
+					.setLabel('Désactiver')
+					.setStyle(ButtonStyle.Danger)
+			);
+			await channel.send({ embeds: [scheduledPromptEmbed], components: [onOffRow] });
+
+			// Attente du choix ON/OFF avant de poursuivre
+			const filter = i => i.customId === 'cron_on' || i.customId === 'cron_off';
+			const collectorCron = channel.createMessageComponentCollector({ filter, max: 1, time: 120000 });
+			await new Promise((resolve) => {
+				collectorCron.on('collect', async (interaction) => {
+					const config = ds.load_data(guild.id, 'config');
+					let newValue = interaction.customId === 'cron_on' ? 'on' : 'off';
+					ds.save_Data('config', guild.id, { ...config, switch_cron_inspire: newValue });
+					await interaction.reply({
+						content: newValue === 'on' ? '✅ L\'envoi planifié de prompts est activé.' : '⛔ L\'envoi planifié de prompts est désactivé.',
+						flags: MessageFlags.Ephemeral
+					});
+					resolve();
+				});
+				collectorCron.on('end', collected => {
+					if (collected.size === 0) {
+						channel.send('⏰ Temps écoulé. Vous pouvez relancer la configuration si besoin.');
+						resolve();
+					}
+				});
+			});
+
+			// Si désactivé, on arrête la config ici
+			const configAfter = ds.load_data(guild.id, 'config');
+			if (configAfter.switch_cron_inspire === 'off') return;
+
 			const select_chan = channel_selector('fr', guild, channel);
 
 		} else if (interaction.customId === 'setup_lang_en') {
@@ -194,7 +246,9 @@ async function config_manager(guild, client) {
 			await ds.save_Data('config', guild.id, {
 					name: guild.name,
 					id: guild.id,
-					lang: 'en'
+					lang: 'en',
+					switch_cron_inspire: 'off',
+					promptChannel: null
 				});
 			
 			// Initialiser les fichiers de données du serveur
@@ -226,8 +280,55 @@ async function config_manager(guild, client) {
 					iconURL: client.user.displayAvatarURL()
 				})
 				.setTimestamp();
-			
+
 			await channel.send({ embeds: [enLanguageEmbed] });
+
+			// Ajout du message d'activation de l'envoi planifié de prompts avec boutons ON/OFF (EN)
+			const setup_content = require('../contents/setup_content.js');
+			console.log(setup_content);
+			const scheduledPromptInfo = setup_content.en.scheduled_prompt_info;
+			const scheduledPromptEmbed = new EmbedBuilder()
+				.setColor(0x3498db)
+				.setTitle(scheduledPromptInfo.name)
+				.setDescription(scheduledPromptInfo.value);
+			const onOffRow = new ActionRowBuilder().addComponents(
+				new ButtonBuilder()
+					.setCustomId('cron_on')
+					.setLabel('Enable')
+					.setStyle(ButtonStyle.Success),
+				new ButtonBuilder()
+					.setCustomId('cron_off')
+					.setLabel('Disable')
+					.setStyle(ButtonStyle.Danger)
+			);
+			await channel.send({ embeds: [scheduledPromptEmbed], components: [onOffRow] });
+
+			// Attente du choix ON/OFF avant de poursuivre
+			const filter = i => i.customId === 'cron_on' || i.customId === 'cron_off';
+			const collectorCron = channel.createMessageComponentCollector({ filter, max: 1, time: 120000 });
+			await new Promise((resolve) => {
+				collectorCron.on('collect', async (interaction) => {
+					const config = ds.load_data(guild.id, 'config');
+					let newValue = interaction.customId === 'cron_on' ? 'on' : 'off';
+					ds.save_Data('config', guild.id, { ...config, switch_cron_inspire: newValue });
+					await interaction.reply({
+						content: newValue === 'on' ? '✅ Scheduled prompt sending is enabled.' : '⛔ Scheduled prompt sending is disabled.',
+						flags: MessageFlags.Ephemeral
+					});
+					resolve();
+				});
+				collectorCron.on('end', collected => {
+					if (collected.size === 0) {
+						channel.send('⏰ Time is up. You can restart the configuration if needed.');
+						resolve();
+					}
+				});
+			});
+
+			// Si désactivé, on arrête la config ici
+			const configAfter = ds.load_data(guild.id, 'config');
+			if (configAfter.switch_cron_inspire === 'off') return;
+
 			const select_chan = channel_selector('en', guild, channel);
 		} else if (interaction.customId === 'channel_selector') {
 			const selectedChannelId = interaction.values[0];
