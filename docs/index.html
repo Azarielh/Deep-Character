@@ -26,6 +26,7 @@
       justify-content: center;
       align-items: center;
       margin-bottom: 18px;
+	  z-index: 8;
     }
     .logo-deepcharacter {
       width: 120px;
@@ -36,6 +37,8 @@
       padding: 12px;
       object-fit: contain;
       transition: transform 0.2s;
+      z-index: 20;
+      position: relative;
     }
     .logo-deepcharacter:hover {
       transform: scale(1.07) rotate(-2deg);
@@ -115,14 +118,16 @@
       border-radius: 50%;
       background: rgba(40,40,60,0.7);
       box-shadow: 0 2px 8px 0 #000a, 0 0 0 3px #ffd70044;
-      pointer-events: none;
+      pointer-events: auto;
       opacity: 0.85;
       transition: box-shadow 0.2s;
-	  z-index: 5;
+      z-index: 15;
+      position: fixed;
     }
     .mini-logo-guild:hover {
       box-shadow: 0 4px 16px 0 #000c, 0 0 0 6px #ffd70066;
       opacity: 1;
+	  z-index: 15;
     }
     .mini-logo-guild-tooltip {
       position: fixed;
@@ -134,16 +139,15 @@
       padding: 10px 22px;
       border-radius: 16px;
       box-shadow: 0 4px 18px #000b, 0 0 0 2px #ffd70033;
-      pointer-events: none;
+      pointer-events: auto;
       opacity: 0;
       transition: opacity 0.18s;
-      z-index: 1000;
+      z-index: 9999;
       white-space: nowrap;
       left: 0;
       top: 0;
       letter-spacing: 0.5px;
       text-shadow: 1px 1px 6px #000, 0 0 2px #ffd70099;
-	  z-index: 8;
     }
   </style>
   <script src="guilds.js" defer></script>

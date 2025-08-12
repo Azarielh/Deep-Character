@@ -339,8 +339,13 @@ async function config_manager(guild, client) {
 			
 			ds.save_Data('config', guild.id, {
 				...config,
-				promptChannel: selectedChannelId
+				promptChannel: selectedChannelId,
 			});
+			const configPath = path.resolve(__dirname, '../../config.json');
+			const dev_config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
+			dev_config.guild_len = (dev_config.guild_len || 0) + 1;
+			fs.writeFileSync(configPath, JSON.stringify(dev_config, null, 2), 'utf-8');			
+			
 			
 			// Embed de fin de configuration
 			const completionEmbed = new EmbedBuilder()
