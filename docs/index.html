@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deep-Character - Discord Bot</title>
+  <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(120deg, #232526 0%, #414345 100%);
+      color: #f5f5f5;
+      font-family: 'Roboto', Arial, sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    header {
+      margin-top: 40px;
+      text-align: center;
+    }
+    .logo-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+    .logo-deepcharacter {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: rgba(40,40,60,0.7);
+      box-shadow: 0 6px 32px 0 #000a, 0 0 0 8px #ffd70044;
+      padding: 12px;
+      object-fit: contain;
+      transition: transform 0.2s;
+    }
+    .logo-deepcharacter:hover {
+      transform: scale(1.07) rotate(-2deg);
+      box-shadow: 0 8px 40px 0 #000c, 0 0 0 12px #ffd70066;
+    }
+    h1 {
+      font-family: 'UnifrakturCook', cursive;
+      font-size: 3rem;
+      color: #ffd700;
+      margin-bottom: 0.2em;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 8px #000;
+    }
+    .subtitle {
+      font-size: 1.3rem;
+      color: #b0b0b0;
+      margin-bottom: 2em;
+    }
+    .invite-btn {
+      display: inline-block;
+      background: linear-gradient(90deg, #7289da 0%, #99aab5 100%);
+      color: #fff;
+      font-size: 1.4rem;
+      font-weight: bold;
+      padding: 1em 2.5em;
+      border: none;
+      border-radius: 40px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+      text-decoration: none;
+      margin: 2em 0 1em 0;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .invite-btn:hover {
+      background: linear-gradient(90deg, #5865f2 0%, #7289da 100%);
+      transform: scale(1.05) rotate(-2deg);
+    }
+    .features {
+      max-width: 700px;
+      margin: 2em auto;
+      background: rgba(30,30,40,0.85);
+      border-radius: 18px;
+      padding: 2em 2em 1em 2em;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.25);
+    }
+    .features h2 {
+      color: #ffd700;
+      font-family: 'UnifrakturCook', cursive;
+      font-size: 2rem;
+      margin-bottom: 1em;
+    }
+    .features ul {
+      list-style: none;
+      padding: 0;
+    }
+    .features li {
+      margin-bottom: 0.7em;
+      font-size: 1.1rem;
+      line-height: 1.5;
+      position: relative;
+      padding-left: 1.5em;
+    }
+    .features li:before {
+      content: '✦';
+      position: absolute;
+      left: 0;
+      color: #ffd700;
+      font-size: 1.2em;
+    }
+    footer {
+      margin-top: auto;
+      padding: 1.5em 0 0.5em 0;
+      color: #888;
+      font-size: 1em;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <img src="logo-DeepCharacter.svg" alt="Deep-Character Logo" class="logo-deepcharacter" />
+    </div>
+    <h1>Deep-Character</h1>
+    <div class="subtitle">The Discord bot for immersive roleplay and character development</div>
+    <a class="invite-btn" href="https://discord.com/oauth2/authorize?client_id=TON_CLIENT_ID&permissions=8&scope=bot%20applications.commands" target="_blank">➕ Invite the bot to your server</a>
+  </header>
+  <section class="features">
+    <h2>Main Features</h2>
+    <ul>
+      <li>Personalized character development prompts (manual or soon : scheduled)</li>
+      <li>Prompt management: add, edit, list, and soon delete</li>
+      <li>Dice rolling for your games</li>
+      <li>Multilingual (FR/EN) and permission system</li>
+      <li>Many features in development: shop, skill tree, campaign tracking, universe quiz, and more!</li>
+    </ul>
+  </section>
+  <footer>
+    &copy; 2025 Deep-Character &mdash; Created by Azarielh<br>
+    <small>Open source & free for all communities</small>
+  </footer>
+</body>
+</html>
