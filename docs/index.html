@@ -124,6 +124,27 @@
       box-shadow: 0 4px 16px 0 #000c, 0 0 0 6px #ffd70066;
       opacity: 1;
     }
+    .mini-logo-guild-tooltip {
+      position: fixed;
+      background: rgba(30,30,40,0.98);
+      color: #ffd700;
+      font-family: 'Roboto', Arial, sans-serif;
+      font-size: 1.15em;
+      font-weight: bold;
+      padding: 10px 22px;
+      border-radius: 16px;
+      box-shadow: 0 4px 18px #000b, 0 0 0 2px #ffd70033;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.18s;
+      z-index: 1000;
+      white-space: nowrap;
+      left: 0;
+      top: 0;
+      letter-spacing: 0.5px;
+      text-shadow: 1px 1px 6px #000, 0 0 2px #ffd70099;
+	  z-index: 8;
+    }
   </style>
   <script src="guilds.js" defer></script>
 </head>
@@ -146,6 +167,7 @@
       <li>Many features in development: shop, skill tree, campaign tracking, universe quiz, and more!</li>
     </ul>
   </section>
+  <div id="mini-logo-guild-tooltip" class="mini-logo-guild-tooltip"></div>
   <footer>
     &copy; 2025 Deep-Character &mdash; Created by Azarielh<br>
     <small>Open source & free for all communities</small>
