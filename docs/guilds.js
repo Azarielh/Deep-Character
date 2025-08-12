@@ -1,4 +1,4 @@
-fetch('stats.json')
+fetch('docs/stats.json')
   .then(res => res.json())
   .then(data => {
     // Affiche le nombre de guilds si un élément existe dans la page
@@ -38,6 +38,7 @@ fetch('stats.json')
           img.dataset.vx = Math.cos(angle) * speed;
           img.dataset.vy = Math.sin(angle) * speed;
           img.dataset.guildName = guildName;
+        }, i * 400);
 
           img.addEventListener('mouseenter', (e) => {
             tooltip.textContent = guildName;
@@ -65,7 +66,6 @@ fetch('stats.json')
             tooltip.style.display = 'none';
           });
           body.appendChild(img);
-        }, i * 400);
       });
 
       function animate() {
