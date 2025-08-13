@@ -21,12 +21,15 @@
       margin-top: 40px;
       text-align: center;
     }
+    strong {
+      font-size: 1.8rem;
+    }
     .logo-container {
       display: flex;
       justify-content: center;
       align-items: center;
       margin-bottom: 18px;
-	  z-index: 8;
+	    z-index: 20;
     }
     .logo-deepcharacter {
       width: 120px;
@@ -46,11 +49,13 @@
     }
     h1 {
       font-family: 'UnifrakturCook', cursive;
+      position: relative;
       font-size: 3rem;
       color: #ffd700;
       margin-bottom: 0.2em;
       letter-spacing: 2px;
       text-shadow: 2px 2px 8px #000;
+      z-index: 20;
     }
     .subtitle {
       font-size: 1.3rem;
@@ -58,9 +63,12 @@
       margin-bottom: 2em;
     }
     .invite-btn {
+      z-index: 20;
       display: inline-block;
+      position: relative;
       background: linear-gradient(90deg, #7289da 0%, #99aab5 100%);
       color: #fff;
+      opacity: 0.8;
       font-size: 1.4rem;
       font-weight: bold;
       padding: 1em 2.5em;
@@ -70,6 +78,7 @@
       text-decoration: none;
       margin: 2em 0 1em 0;
       transition: background 0.2s, transform 0.2s;
+      z-index: 20;
     }
     .invite-btn:hover {
       background: linear-gradient(90deg, #5865f2 0%, #7289da 100%);
@@ -127,7 +136,7 @@
     .mini-logo-guild:hover {
       box-shadow: 0 4px 16px 0 #000c, 0 0 0 6px #ffd70066;
       opacity: 1;
-	  z-index: 15;
+	    z-index: 15;
     }
     .mini-logo-guild-tooltip {
       position: fixed;
@@ -154,7 +163,7 @@
   <script id="stats-json" type="application/json">
   {
     "guilds_list": ["Telzac", "BOT-TEST SERVER"],
-    "guild_len": 2
+    "guild_len": 3
   }
   </script>
 </head>
@@ -164,7 +173,9 @@
       <img src="logo-DeepCharacter.svg" alt="Deep-Character Logo" class="logo-deepcharacter" />
     </div>
     <h1>Deep-Character</h1>
-    <div class="subtitle">The Discord bot for immersive roleplay and character development</div>
+    <div class="subtitle" style="display: flex; align-items: center; justify-content: center; gap: 18px;">
+      <span>The Discord bot for immersive roleplay and character development</span>
+    </div>
     <a class="invite-btn" href="https://discord.com/oauth2/authorize?client_id=1073520013782294569&permissions=8&scope=bot%20applications.commands" target="_blank">➕ Invite the bot to your server</a>
   </header>
   <section class="features">

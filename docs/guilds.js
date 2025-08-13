@@ -18,37 +18,101 @@ function case_set(guilds_len) {
 		return '11-19';
 	if (guilds_len == 20)
 		return '20';
+	if (guilds_len < 50)
+		return '21-49';
+	if (guilds_len == 50)
+		return '50';
+	if (guilds_len < 100)
+		return '51-99';
+	if (guilds_len == 100)
+		return '100';
+	if (guilds_len < 200)
+		return '101-199';
+	if (guilds_len == 200)
+		return '200';
+	if (guilds_len < 500)
+		return '201-499';
+	if (guilds_len == 500)
+		return '500';
+	if (guilds_len < 1000)
+		return '501-999';
+	if (guilds_len == 1000)
+		return '1000';
+	if (guilds_len > 1000)
+		return '1000+++';
 }
 
 if (count_elem) {
 	switch (case_set(data.guild_len)) {
 		case '2':
 			console.log('test')
-			count_elem.innerHTML = 'Pour l\'heure, Deep-Character vit chez ses mondes parents.<br> C\'est eux qui lui ont donné la vie';
+			count_elem.innerHTML = 'Pour l\'heure, Deep-Character vit uniquement chez ses mondes parents.<br> C\'est eux qui lui ont donné la vie';
 			span_verb.textContent = '';
 			break ;
 		case '3':
 			count_elem.textContent = 'Pour la première fois, Deep-Character a été invoqué par un dieu qui n\'est pas son créateur !\n';
-			span_verb.textContent = `Merci pour ton invocation ${data.guilds_list[2]} !`;
+			span_verb.innerHTML = `<br>Merci pour ton invocation <strong>${data.guilds_list[2]}</strong><br>Nous créeront des statues à l'effigie des dieux de ton monde qui l'ont invoqués.`;
 			break ;
 		case '4-9':
 			count_elem.textContent = `${data.guilds_len}`;
-			span_verb.textContent = 'mondes ont';
+			span_verb.innerHTML = `mondes ont invoqué <strong>Deep-Character</strong> pour enrichir leur histoires !`;
 			break ;
-		case 6:
-			span_verb.textContent = 'font vivre'
+		case '10':
+			count_elem.textContent = `${data.guild_len}`;
+			span_verb.innerHTML = `univers ont invoqués <strong>Deep-Character</strong> pour guider leurs héros !<br>Merci ${data.guilds_list[9]}, 10ème monde du multivers.`;
 			break ;
-		case 10:
-			count_elem.textContent = "10";
+		case '11-19':
+			count_elem.textContent = `${data.guild_len}`;
+			span_verb.innerHTML = `mondes ont fait appel à la magie de <strong>Deep-Character</strong> !`;
 			break ;
-		case 16:
-			count_elem.textContent = data.guild_len;
+		case '20':
+			count_elem.textContent = `${data.guild_len}`;
+			span_verb.innerHTML = `univers ont invoqués <strong>Deep-Character</strong> pour guider leurs héros !<br>Merci ${data.guilds_list[19]}, 20ème monde du multivers.`;
 			break ;
+		case '21-49':
+			count_elem.textContent = `${data.guild_len}`;
+			span_verb.innerHTML = `ont acceuilli <strong>Deep-Character</strong> dans leurs légendes.`
+			break ;
+		case '50':
+			count_elem.textContent = `${data.guild_len}`;
+			span_verb.innerHTML = `univers ont invoqués <strong>Deep-Character</strong> pour explorer de nouveaux horizons !<br>Merci ${data.guilds_list[49]}, 50ème monde du multivers.`;
+			break ;
+		case '51-99':
+			count_elem.textContent = `${data.guild_len}`;
+			span_verb.innerHTML = `ont ouvert leur portail à <strong>Deep-Character</strong> !`;
+		case '100':
+			count_elem.textContent = `Wooww !! ${data.guild_len}`;
+			span_verb.innerHTML = `univers ont fait appel à <strong>Deep-Character</strong> pour la magie qu'il détient !<br>Merci ${data.guilds_list[99]}, 100ème monde du multivers.`;
+			break ;
+		case '101-199':
+			count_elem.textContent = `${data.guild_len}`;
+			span_verb.innerHTML = `ont finalement fait appel à <strong>Deep-Character</strong> pour servir leur monde`;
+			break ;
+		case '200':
+			count_elem.textContent = `${data.guild_len}`;
+			span_verb.innerHTML = `univers ont été séduit par la magie <strong>Deep-Character</strong> et l'ont invoqués sur leurs terres !<br>Merci ${data.guilds_list[199]}, 200ème monde du multivers.<br>Merci à tous !`;
+			break ;
+		case '201-499':
+			count_elem.textContent = `${data.guild_len}`;
+			span_verb.innerHTML = `ont invoqué leur serviteur <strong>Deep-Character</strong> pour challenger leurs joueurs !`;
+			break ;
+		case '500':
+			count_elem.textContent = `${data.guild_len}`;
+			span_verb.innerHTML = `univers ont invoqués <strong>Deep-Character</strong> comme guide roliste !<br>Merci ${data.guilds_list}, 500ème monde du multivers.`;
+			break ;
+		case '501-999':
+			count_elem.textContent = `${data.guild_len}`;
+			span_verb.innerHTML = `mondes ont appel à <strong>Deep-Character</strong> pour assister leurs dieux.`
+		case '1000':
+			count_elem.textContent = `Wooowww !! C'est incroyable ! ${data.guild_len}`;
+			span_verb.innerHTML = `univers ont usés de leur magie pour invoqués <strong>Deep-Character</strong> comme serviteur !<br>Merci ${data.guilds_list}, 1000ème monde du multivers.<br> Merci à tous ! Je n'aurais jamais cru en arriver là !`
+			break ;
+
 	}
 }
 window.addEventListener('DOMContentLoaded', () => {
 	const logoSrc = 'logo-DeepCharacter.svg';
-	const miniSize = 60 / data.guild_len > 15? 60 / data.guild_len: 15;
+	const miniSize = 70 / data.guild_len < 70 ? 70 : 70 / data.guild_len;
 	const body = document.body;
 	const tooltip = document.getElementById('mini-logo-guild-tooltip');
 	const big_logo = document.querySelector('.logo-deepcharacter');
