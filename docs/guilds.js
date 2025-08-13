@@ -46,7 +46,7 @@ if (count_elem) {
 	switch (case_set(data.guild_len)) {
 		case '2':
 			console.log('test')
-			count_elem.innerHTML = 'Pour l\'heure, Deep-Character vit uniquement chez ses mondes parents.<br> C\'est eux qui lui ont donné la vie';
+			count_elem.innerHTML = `<strong>Deep-Character</strong> a  pris conscience de son existence et parcourt les mondes qui lui ont donné la vie<br>Il ne sait pas encore que son histoire pourra lui faire découvrir une infinité d'autres monde.<br>Mais cela, ça dépend de vous ! Alors ? Allez-vous l'invoquer comme serviteur? `;
 			span_verb.textContent = '';
 			break ;
 		case '3':
