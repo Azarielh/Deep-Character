@@ -2,6 +2,28 @@
 const fs	= require('node:fs');
 const path	= require('node:path');
 
+// Chemin du fichier index.html à modifier
+const INDEX_HTML_PATH = path.resolve(__dirname, '../../docs/index.html');
+
+/**
+ * Lit et modifie le bloc <script id="stats-json"> dans index.html
+ * @returns {Object} Les données JSON actuelles
+ */
+function getStatsJson() {
+	const html = fs.readFileSync(INDEX_HTML_PATH, 'utf8');
+	const match = html.match(/<script id="stats-json" type="application\/json">([\s\S]*?)<\/script>/);
+	if (!match) throw new Error('Bloc <script id="stats-json"> introuvable');
+	return JSON.parse(match[1]);
+}
+
+function setStatsJson(newData) {
+	const html = fs.readFileSync(INDEX_HTML_PATH, 'utf8');
+	const newJson = JSON.stringify(newData, null, 2);
+	const newHtml = html.replace(/(<script id="stats-json" type="application\/json">)[\s\S]*?(<\/script>)/,
+		`$1\n  ${newJson}\n  $2`);
+	fs.writeFileSync(INDEX_HTML_PATH, newHtml, 'utf8');
+}
+
 // Discord requirements
 const {
 	ChannelType,
@@ -18,98 +40,27 @@ const {
 
 // Custom module
 const ds = require('../services/data_service.js');
+const setup_content = require('../contents/setup_content.js');
+const { getSetupEmbed } = require('../contents/setup_content.js');
 
-// Messages multilingues pour le setup
-const embedMessages = {
-	fr: {
-		title: '# Bienvenue dans Deep-Character Setup!',
-		description: '## Ce channel temporaire vous permettra de configurer votre bot Deep-Character.\n',
-		fields: [
-			{
-				name: '### 📋 Que fait ce channel ?',
-				value: '• **Configuration des paramètres du bot**\n• **Choix de la langue (français/anglais)**\n• **Initialisation des prompts standards dans la langue choisie.**\n• **Définition des rôles et permissions**\n\n',
-				inline: false
-			},
-			{
-				name: '### ⚙️ Comment procéder ?',
-				value: '**Utilisez les boutons et menus ci-dessous pour configurer votre bot selon vos préférences. Chaque étape sera guidée.**\n\n',
-				inline: false
-			},
-			{
-				name: '### 🗑️ Suppression automatique',
-				value: '**Ce channel se supprimera automatiquement une fois la configuration terminée.**\n\n',
-				inline: false
-			},
-			{
-				name: '### 🔄 Reconfiguration',
-				value: '**Besoin de modifier la configuration plus tard ? Utilisez la commande `/setup` pour rouvrir ce channel.\n\n**',
-				inline: false
-			},
-			{
-				name: '## Passons à la toute première étape !',
-				value: '**Choisissez la langue de votre serveur à l\aide des drapeaux ci dessous\n\n',
-				inline: false
-			}
-		]
-	},
-	en: {
-		title: '# 🎭 Welcome to Deep-Character Setup!',
-		description: '## This temporary channel will allow you to configure your Deep-Character bot.\n',
-		fields: [
-			{
-				name: '### 📋 What does this channel do?',
-				value: '• **Bot parameters configuration**\n• **Language choice (French/English)**\n• **Standards prompts in the languages you choosed**\n• **Roles and permissions definition**\n\n',
-				inline: false
-			},
-			{
-				name: '### ⚙️ How to proceed?',
-				value: '**Use the buttons and menus below to configure your bot according to your preferences. Each step will be guided.**\n\n',
-				inline: false
-			},
-			{
-				name: '### 🗑️ Automatic deletion',
-				value: '**This channel will automatically delete itself once the configuration is completed.**\n\n',
-				inline: false
-			},
-			{
-				name: '### 🔄 Reconfiguration',
-				value: '**Need to modify the configuration later? Use the `/setup` command to reopen this channel.**\n\n',
-				inline: false
-			}
-		]
+function createSetupEmbed(language, client, stepKey = 'welcome_embed') {
+	const messages = getSetupEmbed(language, stepKey);
+	const embed = new EmbedBuilder()
+		.setColor(0x5865F2);
+	if (messages.title) embed.setTitle(messages.title);
+	if (messages.description) embed.setDescription(messages.description);
+	if (Array.isArray(messages.fields)) {
+		embed.addFields(messages.fields);
+	} else if (messages.name && messages.value) {
+		embed.addFields([{ name: messages.name, value: messages.value }]);
 	}
-};
-
-const menu_translation = {
-    fr: {
-		confirm_lang_prompt: 'Veuillez confirmer la langue de votre serveur',
-        sel_chan_msg: 'Il faut choisir un salon où je pourrais poster les prompts pour vos joueurs.',
-        sel_chan_placeholder: 'Choisissez un salon...',
-        continue: 'Continuer',
-        cancel: 'Annuler'
-    },
-    en: {
-		confirm_lang_prompt: 'Veuillez confirmer la langue de votre serveur',
-        sel_chan_msg: 'Choose a channel',
-        sel_chan_placeholder: 'No category', 
-        continue: 'Continue',
-        cancel: 'Cancel'
-    }
-};
-
-// Fonction pour créer l'embed de setup
-function createSetupEmbed(language, client) {
-	const messages = embedMessages[language];
-	return new EmbedBuilder()
-		.setColor(0x5865F2)
-		.setTitle(messages.title)
-		.setDescription(messages.description)
-		.addFields(messages.fields)
-		.setFooter({ 
-			text: 'Deep-Character • Configuration',
-			iconURL: client.user.displayAvatarURL()
-		})
-		.setTimestamp();
+	if (messages.footer) {
+		embed.setFooter({ text: messages.footer, iconURL: client.user.displayAvatarURL() });
+	} else {
+		embed.setFooter({ text: 'Deep-Character • Configuration', iconURL: client.user.displayAvatarURL() });
+	}
+	embed.setTimestamp();
+	return embed;
 }
 
 async function config_manager(guild, client) {
@@ -146,7 +97,7 @@ async function config_manager(guild, client) {
 
 	collector.on('collect', async (interaction) => {
 		if (interaction.customId === 'setup_lang_fr') {
-			const frEmbed = createSetupEmbed('fr', client);
+			const frEmbed = createSetupEmbed('fr', client, 'welcome_embed');
 
 			await interaction.update({ embeds: [frEmbed], components: [languageButtons]});
 			ds.build_guild_folder(guild.id);
@@ -189,13 +140,10 @@ async function config_manager(guild, client) {
 
 			await channel.send({ embeds: [frLanguageEmbed] });
 
-			// Ajout du message d'activation de l'envoi planifié de prompts avec boutons ON/OFF
-			const setup_content = require('../contents/setup_content.js');
-			const scheduledPromptInfo = setup_content.fr.scheduled_prompt_info;
 			const scheduledPromptEmbed = new EmbedBuilder()
 				.setColor(0x3498db)
-				.setTitle(scheduledPromptInfo.name)
-				.setDescription(scheduledPromptInfo.value);
+				.setTitle(scheduledPromptName)
+				.setDescription(scheduledPromptValue);
 			const onOffRow = new ActionRowBuilder().addComponents(
 				new ButtonBuilder()
 					.setCustomId('cron_on')
@@ -230,7 +178,6 @@ async function config_manager(guild, client) {
 				});
 			});
 
-			// Si désactivé, on arrête la config ici
 			const configAfter = ds.load_data(guild.id, 'config');
 			if (configAfter.switch_cron_inspire === 'off') return;
 
@@ -254,43 +201,10 @@ async function config_manager(guild, client) {
 			// Initialiser les fichiers de données du serveur
 			ds.load_data(guild.id, 'data_character');
 			ds.load_data(guild.id, 'prompts');
-			const enLanguageEmbed = new EmbedBuilder()
-				.setColor(0x28a745)
-				.setTitle('🇬🇧 English language selected')
-				.setDescription('Now that you choosed English, I\'ve assigned a standard prompt\'s file for your guild.\n')
-				.addFields(
-					{
-						name: '📝 About standard prompts',
-						value: 'Those prompts are supposed to be universal and should work for any kind of world going from medieval (or earlier) to far future and with or without magic.\n',
-						inline: false
-					},
-					{
-						name: '💬 Need help?',
-						value: 'Please if you find anything you feel doesn\'t qualify as such standard, feel free to contact me.\n',
-						inline: false
-					},
-					{
-						name: '🎯 Next step',
-						value: 'From now on you can add your own prompts so you can have specific prompts for your world.\n',
-						inline: false
-					}
-				)
-				.setFooter({ 
-					text: 'Deep-Character • Configuration - Step 2/3',
-					iconURL: client.user.displayAvatarURL()
-				})
-				.setTimestamp();
-
+			const enLanguageEmbed = createSetupEmbed('en', client, 'language_confirmation');
 			await channel.send({ embeds: [enLanguageEmbed] });
 
-			// Ajout du message d'activation de l'envoi planifié de prompts avec boutons ON/OFF (EN)
-			const setup_content = require('../contents/setup_content.js');
-			console.log(setup_content);
-			const scheduledPromptInfo = setup_content.en.scheduled_prompt_info;
-			const scheduledPromptEmbed = new EmbedBuilder()
-				.setColor(0x3498db)
-				.setTitle(scheduledPromptInfo.name)
-				.setDescription(scheduledPromptInfo.value);
+			const scheduledPromptEmbed = createSetupEmbed('en', client, 'scheduled_prompt_info');
 			const onOffRow = new ActionRowBuilder().addComponents(
 				new ButtonBuilder()
 					.setCustomId('cron_on')
@@ -467,14 +381,14 @@ async function channel_selector(language, guild, channel) {
 		}));
 	const channel_select_menu = new StringSelectMenuBuilder()
 			.setCustomId('channel_selector')
-			.setPlaceholder(menu_translation[language].sel_chan_placeholder)
+			.setPlaceholder(setup_content.menu_translation[language].sel_chan_placeholder)
 			.setMinValues(1)
 			.setMaxValues(1)
 			.addOptions(channels);
 	const select_row = new ActionRowBuilder()
 			.addComponents(channel_select_menu);
 	await channel.send({
-			content: menu_translation[language].sel_chan_msg,
+			content: setup_content.menu_translation[language].sel_chan_msg,
 			components: [select_row]
 		});
 	return select_row;

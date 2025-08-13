@@ -66,7 +66,6 @@ async function list(interaction, startIndex = 0) {
 		const contentDescription = ActualPrompts.map(prompt => 
 			`**${prompt.num}**. 🏷️ ${msg.green(prompt.tag)}\n${prompt.Pprompt}`
 		).join('\n\n');
-		console.log("contentDescription is set : line 65.");
 		// Créer l'embed avec le header multilingue
 		const embed = new EmbedBuilder()
 			.setTitle(msg.command_content[lang].list.messages.title)
