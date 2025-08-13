@@ -1,4 +1,4 @@
-fetch('/Deep-Character/docs/stats.json')
+fetch('stats.json')
   .then(res => res.json())
   .then(data => {
     // Affiche le nombre de guilds si un élément existe dans la page
